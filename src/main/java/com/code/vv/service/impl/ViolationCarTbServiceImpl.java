@@ -87,4 +87,9 @@ public class ViolationCarTbServiceImpl implements ViolationCarTbService {
         return violationCarTbMapper.updateBatchSelective(list);
     }
 
+    @Override
+    public List<ViolationCarTb> findAll() {
+        return violationCarTbMapper.findAll();
+    }
+
 }

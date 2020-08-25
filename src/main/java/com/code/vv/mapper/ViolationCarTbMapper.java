@@ -1,4 +1,5 @@
 package com.code.vv.mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.code.vv.model.ViolationCarTb;
 import org.apache.ibatis.annotations.Mapper;
@@ -68,4 +69,12 @@ public interface ViolationCarTbMapper {
      * @return update count
      */
     int updateBatchSelective(List<ViolationCarTb> list);
+
+    /**
+     * 查询所有车辆信息
+     * @return List<ViolationCarTb>
+     */
+    List<ViolationCarTb> findAll();
+
+
 }

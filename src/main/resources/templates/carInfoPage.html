@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CarInfoPage</title>
+</head>
+
+<style type="text/css">
+    table.imageTable {
+        font-family: verdana,arial,sans-serif;
+        font-size:11px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+        align-content: center;
+    }
+    table.imageTable th {
+        background:#b5cfd2;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #999999;
+    }
+    table.imageTable td {
+        background:#dcddc0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #999999;
+    }
+</style>
+
+<body>
+<h2>车辆信息</h2>
+<table class="imageTable">
+    <thead>
+    <tr>
+        <th hidden> 车辆注册 ID</th>
+        <th>车辆车牌信息</th>
+        <th>车辆颜色</th>
+        <th>车辆限乘人数</th>
+    </tr>
+    </thead>
+    <tbody th:remove="all-but-first" style="align-content: center">
+    <tr th:each="car : ${carList}">
+        <td hidden th:text="${car.getId()}"></td>
+        <td th:text="${car.getLicensePlate()}"></td>
+        <td th:text="${car.getColor()}"></td>
+        <td th:text="${car.getSeatNumber()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<input type="button" value="新增车辆信息" onclick=jump()>
+
+
+<script>
+    function jump(){
+        window.location.href="http://localhost:8080/carInsert";
+    }
+</script>
+</body>
+</html>

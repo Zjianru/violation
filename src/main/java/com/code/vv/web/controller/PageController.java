@@ -45,6 +45,11 @@ public class PageController {
         return "/plainBackIndex";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/carInsert")
+    public String insertCarMethod() {
+        return "/carInsert";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/anonymous")
     public String anonymousMethod() {
         return "/anonymousList";

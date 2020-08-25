@@ -108,4 +108,10 @@
             #{item.id,jdbcType=INTEGER}
         </foreach>
     </update>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from violationdb.violation_car_tb
+    </select>
 </mapper>

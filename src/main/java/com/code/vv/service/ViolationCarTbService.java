@@ -63,4 +63,9 @@ public interface ViolationCarTbService {
      */
     int updateBatchSelective(List<ViolationCarTb> list);
 
+    /**
+     * 查询所有车辆信息
+     * @return List<ViolationCarTb>
+     */
+    List<ViolationCarTb> findAll();
 }

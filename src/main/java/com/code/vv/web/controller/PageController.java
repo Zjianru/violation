@@ -45,6 +45,10 @@ public class PageController {
         return "/plainBackIndex";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/anonymous")
+    public String anonymousMethod() {
+        return "/anonymousList";
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/error")
     public String errorPageMethod() {

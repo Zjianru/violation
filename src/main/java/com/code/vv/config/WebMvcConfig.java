@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
     @Autowired
     private LoginInterceptor loginAuthenticator;
 
@@ -25,10 +26,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginAuthenticator).
-                addPathPatterns("/**").
-                excludePathPatterns("/login").
-                excludePathPatterns("/loginPage");
+        registry.addInterceptor(loginAuthenticator)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/loginPage")
+                .excludePathPatterns("/anonymous")
+                .excludePathPatterns("/getAnonymousList");
     }
 
 }

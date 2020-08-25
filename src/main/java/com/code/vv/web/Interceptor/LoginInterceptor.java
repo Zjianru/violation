@@ -16,12 +16,22 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
+    /**
+     * 前置处理
+     * 判断 session 中是否有指定内容
+     * 判断用户登陆状态
+     * @param request request
+     * @param response response
+     * @param handler handler
+     * @return boolean
+     * @throws Exception Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        Object obj = request.getSession().getAttribute(Const.USER_SESSION_KEY);
-        // 如果user不为空则放行
-        if (null != obj) {
+        Object user = request.getSession().getAttribute(Const.USER_SESSION_KEY);
+        // 如果 session 中 user 不为空，则放行
+        if (null != user) {
             return true;
         }
         // 否则拦截并跳转到登录

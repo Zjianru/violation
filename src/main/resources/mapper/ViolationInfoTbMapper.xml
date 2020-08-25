@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.vv.mapper.ViolationInfoTbMapper">
+    <resultMap id="BaseResultMap" type="com.code.vv.model.ViolationInfoTb">
+        <!--@Table violationdb.violation_info_tb-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="license_plate" jdbcType="VARCHAR" property="licensePlate"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="place" jdbcType="VARCHAR" property="place"/>
+        <result column="violation_context" jdbcType="INTEGER" property="violationContext"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,
+        license_plate,
+        `time`,
+        place,
+        violation_context
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from violationdb.violation_info_tb
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from violationdb.violation_info_tb
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.code.vv.model.ViolationInfoTb"
+            useGeneratedKeys="true">
+        insert into violationdb.violation_info_tb (license_plate, `time`, place,
+                                                   violation_context)
+        values (#{licensePlate,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR},
+                #{violationContext,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.code.vv.model.ViolationInfoTb"
+            useGeneratedKeys="true">
+        insert into violationdb.violation_info_tb
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="licensePlate != null">
+                license_plate,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+            <if test="place != null">
+                place,
+            </if>
+            <if test="violationContext != null">
+                violation_context,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="licensePlate != null">
+                #{licensePlate,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="place != null">
+                #{place,jdbcType=VARCHAR},
+            </if>
+            <if test="violationContext != null">
+                #{violationContext,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.code.vv.model.ViolationInfoTb">
+        update violationdb.violation_info_tb
+        <set>
+            <if test="licensePlate != null">
+                license_plate = #{licensePlate,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="place != null">
+                place = #{place,jdbcType=VARCHAR},
+            </if>
+            <if test="violationContext != null">
+                violation_context = #{violationContext,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.code.vv.model.ViolationInfoTb">
+        update violationdb.violation_info_tb
+        set license_plate     = #{licensePlate,jdbcType=VARCHAR},
+            `time`            = #{time,jdbcType=TIMESTAMP},
+            place             = #{place,jdbcType=VARCHAR},
+            violation_context = #{violationContext,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        update violationdb.violation_info_tb
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="license_plate = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.licensePlate != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.licensePlate,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`time` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.time != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.time,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="place = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.place != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.place,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="violation_context = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.violationContext != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.violationContext,jdbcType=INTEGER}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+</mapper>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理页面</title>
+</head>
+<body scroll="no">
+    <h1>Admin Backend Control Page</h1>
+
+    <TABLE class=viewform width=100% id=oTable1 cellpadding="0px" cellspacing="0px" height="100%">
+        <TBODY>
+        <tr>
+            <td height=100% id=oTd1 name=oTd1 width="220px"
+                style="padding: 2px;">
+                <IFRAME name=leftframe id=leftframe src="/admin/leftNavigation" width="100%" height="100%" frameborder=no scrolling=no>
+                    浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。
+                </IFRAME>
+            </td>
+            <td height=100% id=oTd2 name=oTd2 width="*" style="padding: 0px">
+                <IFRAME name=contentframe id=contentframe src="/admin/body" width="100%" height="100%" frameborder=no scrolling=yes>
+                    浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。
+                </IFRAME>
+            </td>
+        </tr>
+        </TBODY>
+    </TABLE>
+</body>
+</html>

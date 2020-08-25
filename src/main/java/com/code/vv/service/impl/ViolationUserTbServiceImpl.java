@@ -108,7 +108,7 @@ public class ViolationUserTbServiceImpl implements ViolationUserTbService {
      * @return 查到的用户对象
      */
     @Override
-    public ViolationUserTb login(String userName, String password) {
-        return violationUserTbMapper.login(userName,password);
+    public ViolationUserTb login(String name, String password) {
+        return violationUserTbMapper.login(name,password);
     }
 }

@@ -71,10 +71,10 @@ public interface ViolationUserTbService {
 
     /**
      * 登陆用
-     * @param userName 用户名
+     * @param name 用户名
      * @param password 密码
      * @return 查到的用户对象
      */
-    ViolationUserTb login(String userName,String password);
+    ViolationUserTb login(String name,String password);
 
 }

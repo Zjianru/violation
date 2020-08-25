@@ -76,5 +76,5 @@ public interface ViolationUserTbMapper {
      * @param password 密码
      * @return 查到的对象
      */
-    ViolationUserTb login(@Param("userName")String userName, @Param("password")String password);
+    ViolationUserTb login(@Param("name")String name, @Param("password")String password);
 }

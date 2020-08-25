@@ -23,7 +23,7 @@ public class ViolationUserTb {
     private String password;
 
     /**
-     * 用户状态
+     * 用户权限
      * 0：Admin 权限
      * 1：普通用户权限
      */

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>adminContextUpdatePage</title>
+</head>
+<body>
+    <h2>admin Context Update Page</h2>
+
+    修改违章内容
+<form action="/admin/context/update" method="post" name="updateContextForm">
+    <input type="hidden" id="id" th:name="id" th:value="${key}" th:text="${key}"><br>
+    违章内容：
+    <label for="context"></label><input type="text" id="context" name="context"><br>
+    扣分情况：
+    <label for="deduction"></label><input type="text" id="deduction" name="deduction"><br>
+    罚款情况：
+    <label for="amerce"></label><input type="text" id="amerce" name="amerce">
+    <input type="submit" value="提交">
+</form>
+
+
+</body>
+</html>

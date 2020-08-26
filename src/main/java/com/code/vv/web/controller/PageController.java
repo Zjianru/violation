@@ -1,8 +1,14 @@
 package com.code.vv.web.controller;
 
+import com.code.vv.common.Const;
+import com.code.vv.model.ViolationUserTb;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created on 2020/8/24.
@@ -69,6 +75,16 @@ public class PageController {
     public String addContextMethod() {
         return "/adminContextCreatePage";
     }
+
+
+    @RequestMapping(value = "/admin/context/updatePage/{id}", method = RequestMethod.GET)
+    public ModelAndView adminContextUpdatePage(@PathVariable("id") String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("key", id);
+        modelAndView.setViewName("/adminContextUpdatePage");
+        return modelAndView;
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/error")
     public String errorPageMethod() {

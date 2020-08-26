@@ -7,8 +7,10 @@ import com.code.vv.service.ViolationContextTbService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 
@@ -32,10 +34,11 @@ public class ContextController {
     /**
      * adminContextCreate
      * 创建 Context
-     * @param session session
-     * @param context context 违章内容，实际指违章项目
+     *
+     * @param session   session
+     * @param context   context 违章内容，实际指违章项目
      * @param deduction deduction 扣分情况
-     * @param amerce amerce 罚款情况
+     * @param amerce    amerce 罚款情况
      * @return String 跳转页面 URL
      */
     @RequestMapping(method = RequestMethod.POST, value = "/admin/context/create")
@@ -71,6 +74,7 @@ public class ContextController {
 
     /**
      * adminContextFindAll
+     * 查找当前所有 context 信息
      *
      * @param model   model
      * @param session session
@@ -87,6 +91,53 @@ public class ContextController {
         }
     }
 
-// adminContextUpdate 更改Context
+// adminContextUpdate 更改 Context
+
+    @RequestMapping(method = RequestMethod.POST, value = "/admin/context/update")
+    public String adminContextUpdate(HttpSession session,
+                                     @Param("id") String id,
+                                     @Param("context") String context,
+                                     @Param("deduction") String deduction,
+                                     @Param("amerce") String amerce) {
+        // 权限判定
+        ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
+        if (userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
+            return "/error";
+        }
+        // 违章描述唯一
+        ViolationContextTb selectByPrimaryKey = contextTbService.selectByPrimaryKey(Integer.valueOf(id));
+
+        if (!context.equals(selectByPrimaryKey.getContext()) && contextTbService.findByContext(context).size()>=1) {
+            return "/error";
+        }
+        //创建时需判定扣分与罚款必须有一个填写
+        if (deduction == null || deduction.length() <= 0) {
+            deduction = "0";
+        }
+        if (amerce == null || amerce.length() <= 0) {
+            amerce = "0";
+        }
+        selectByPrimaryKey.setId(Integer.valueOf(id));
+        selectByPrimaryKey.setContext(context);
+        selectByPrimaryKey.setDeduction(Integer.valueOf(deduction));
+        selectByPrimaryKey.setAmerce(new BigDecimal(amerce));
+        contextTbService.updateByPrimaryKeySelective(selectByPrimaryKey);
+        return "redirect:/admin/context/findAll";
+    }
+
 // adminContextDelete 删除Context
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/admin/context/delete/{id}")
+    public String adminContextDelete(@PathVariable("id") String id,HttpSession session) {
+        // 权限判定
+        ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
+        if (userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
+            return "/error";
+        }
+        contextTbService.deleteByPrimaryKey(Integer.valueOf(id));
+        return "redirect:/admin/context/findAll";
+    }
+
+
 }

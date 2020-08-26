@@ -51,8 +51,8 @@
         <td th:text="${context.getDeduction()}"></td>
         <td th:text="${context.getAmerce()}"></td>
         <td>
-<!--            todo update 需要查查-->
-            <a th:href="@{'/admin/context/update/'+${context.getId()}}" onclick="alert('确定封存这个账号吗？这个账号将不能登录！')"> 封存 </a>
+            <a th:href="@{'/admin/context/updatePage/'+${context.getId()}}" onclick="alert('确定修改这个违章内容吗？')"> 修改 </a>
+            <a th:href="@{'/admin/context/delete/'+${context.getId()}}" onclick="alert('确定删除这个违章内容吗？')"> 删除 </a>
         </td>
 
     </tr>

@@ -9,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
  * Created on 2020/8/25.
  * com.code.vv.web.controller
+ * 汽车 相关业务控制 Controller
  *
  * @author Zjianru
  */
@@ -27,11 +29,20 @@ public class CarController {
         this.carService = carService;
     }
 
+    /**
+     * 新增车辆信息
+     *
+     * @param session      session
+     * @param licensePlate 车牌
+     * @param color        车身颜色
+     * @param seatNumber   限乘人数
+     * @return String 跳转页面地址
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/createCar")
     public String createCarInfo(HttpSession session,
-                                      @Param("licensePlate") String licensePlate,
-                                      @Param("color") String color,
-                                      @Param("seatNumber") int seatNumber) {
+                                @Param("licensePlate") String licensePlate,
+                                @Param("color") String color,
+                                @Param("seatNumber") int seatNumber) {
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
         if (userInfo.getRole() != 1) {
             return "/error";
@@ -44,12 +55,19 @@ public class CarController {
                 car.setSeatNumber(seatNumber);
                 carService.insert(car);
                 return "redirect:/carInfo";
-            }else {
+            } else {
                 return "/error";
             }
         }
     }
 
+    /**
+     * 车辆信息查看
+     *
+     * @param model   model
+     * @param session session
+     * @return String
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/carInfo")
     public String carInfo(Model model, HttpSession session) {
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);

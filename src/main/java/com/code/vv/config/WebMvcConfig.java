@@ -29,6 +29,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("forward:/login");
     }
 
+    /**
+     * 路径排除
+     * @param registry InterceptorRegistry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginAuthenticator)

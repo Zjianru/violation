@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Created on 2020/8/24.
  * com.code.vv.controller
+ * 页面跳转相关逻辑
  *
  * @author Zjianru
  */
@@ -27,7 +28,6 @@ public class PageController {
     public String adminBackIndexMethod() {
         return "/adminBackIndex";
     }
-
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/plain/leftNavigation")
@@ -55,8 +55,8 @@ public class PageController {
         return "/anonymousList";
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/changePassPage")
-    public String changePassPage(){
+    @RequestMapping(method = RequestMethod.GET, value = "/changePassPage")
+    public String changePassPage() {
         return "/changePassPage";
     }
 

@@ -11,7 +11,12 @@ import com.code.vv.vo.ViolationDetails;
  * @author Zjianru
  */
 public class VoTransfer {
-
+    /**
+     * ViolationDetails 对象转换工具
+     * @param info ViolationInfoTb 对象
+     * @param context ViolationContextTb 对象
+     * @return ViolationDetails 对象
+     */
     public static ViolationDetails detailVoTransfer(ViolationInfoTb info, ViolationContextTb context) {
 
         ViolationDetails details = new ViolationDetails();

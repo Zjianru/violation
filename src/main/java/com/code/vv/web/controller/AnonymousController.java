@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created on 2020/8/25.
  * com.code.vv.web.controller
- *
+ * 匿名用户访问控制 Controller
  * @author Zjianru
  */
 @RestController

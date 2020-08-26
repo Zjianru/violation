@@ -88,15 +88,5 @@ public class ViolationInfoTbServiceImpl implements ViolationInfoTbService {
         return violationInfoTbMapper.updateByPrimaryKey(record);
     }
 
-    /**
-     * 批量选择性更新
-     *
-     * @param list batch list
-     * @return update count
-     */
-    @Override
-    public int updateBatchSelective(List<ViolationInfoTb> list) {
-        return violationInfoTbMapper.updateBatchSelective(list);
-    }
 
 }

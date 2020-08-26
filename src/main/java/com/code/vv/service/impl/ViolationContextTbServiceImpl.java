@@ -91,15 +91,6 @@ public class ViolationContextTbServiceImpl implements ViolationContextTbService 
         return violationContextTbMapper.updateByPrimaryKey(record);
     }
 
-    /**
-     * 批量选择性更新
-     *
-     * @param list batch list
-     * @return update count
-     */
-    @Override
-    public int updateBatchSelective(List<ViolationContextTb> list) {
-        return violationContextTbMapper.updateBatchSelective(list);
-    }
+
 
 }

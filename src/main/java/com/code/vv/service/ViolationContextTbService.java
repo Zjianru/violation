@@ -61,12 +61,4 @@ public interface ViolationContextTbService {
      */
     int updateByPrimaryKey(ViolationContextTb record);
 
-    /**
-     * 批量选择性更新
-     *
-     * @param list batch list
-     * @return update count
-     */
-    int updateBatchSelective(List<ViolationContextTb> list);
-
 }

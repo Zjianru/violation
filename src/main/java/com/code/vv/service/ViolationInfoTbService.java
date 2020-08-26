@@ -55,12 +55,5 @@ public interface ViolationInfoTbService {
      * @return update count
      */
     int updateByPrimaryKey(ViolationInfoTb record);
-    /**
-     * 批量选择性更新
-     *
-     * @param list batch list
-     * @return update count
-     */
-    int updateBatchSelective(List<ViolationInfoTb> list);
 
 }

@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created on 2020/8/26.
  * com.code.vv.web.controller
- *
+ * 违章内容控制 Controller
  * @author Zjianru
  */
 @Controller
@@ -91,8 +92,20 @@ public class ContextController {
         }
     }
 
-// adminContextUpdate 更改 Context
 
+
+
+    /**
+     * adminContextUpdate
+     * 更改 Context
+     *
+     * @param session   session
+     * @param id        待修改 Context 的 id
+     * @param context   新的 context
+     * @param deduction 新的 deduction
+     * @param amerce    新的 amerce
+     * @return String
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/admin/context/update")
     public String adminContextUpdate(HttpSession session,
                                      @Param("id") String id,
@@ -107,7 +120,7 @@ public class ContextController {
         // 违章描述唯一
         ViolationContextTb selectByPrimaryKey = contextTbService.selectByPrimaryKey(Integer.valueOf(id));
 
-        if (!context.equals(selectByPrimaryKey.getContext()) && contextTbService.findByContext(context).size()>=1) {
+        if (!context.equals(selectByPrimaryKey.getContext()) && contextTbService.findByContext(context).size() >= 1) {
             return "/error";
         }
         //创建时需判定扣分与罚款必须有一个填写
@@ -125,11 +138,17 @@ public class ContextController {
         return "redirect:/admin/context/findAll";
     }
 
-// adminContextDelete 删除Context
 
-
+    /**
+     * adminContextDelete
+     * 删除 Context
+     *
+     * @param id      待修改 Context 的 id
+     * @param session session
+     * @return 跳转页面 url
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/admin/context/delete/{id}")
-    public String adminContextDelete(@PathVariable("id") String id,HttpSession session) {
+    public String adminContextDelete(@PathVariable("id") String id, HttpSession session) {
         // 权限判定
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
         if (userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {

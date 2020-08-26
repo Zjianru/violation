@@ -1,4 +1,6 @@
 package com.code.vv.mapper;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import com.code.vv.model.ViolationInfoTb;
 
@@ -56,4 +58,12 @@ public interface ViolationInfoTbMapper {
      * @return update count
      */
     int updateByPrimaryKey(ViolationInfoTb record);
+
+    /**
+     * 查找所有违章信息
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findAll();
+
+
 }

@@ -87,6 +87,12 @@ public class ViolationInfoTbServiceImpl implements ViolationInfoTbService {
     public int updateByPrimaryKey(ViolationInfoTb record) {
         return violationInfoTbMapper.updateByPrimaryKey(record);
     }
-
-
+    /**
+     * 查找所有违章信息
+     * @return List<ViolationInfoTb>
+     */
+    @Override
+    public List<ViolationInfoTb> findAll() {
+        return violationInfoTbMapper.findAll();
+    }
 }

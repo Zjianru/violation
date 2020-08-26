@@ -55,5 +55,9 @@ public interface ViolationInfoTbService {
      * @return update count
      */
     int updateByPrimaryKey(ViolationInfoTb record);
-
+    /**
+     * 查找所有违章信息
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findAll();
 }

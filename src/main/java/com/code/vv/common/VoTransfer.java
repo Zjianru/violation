@@ -4,6 +4,9 @@ import com.code.vv.model.ViolationContextTb;
 import com.code.vv.model.ViolationInfoTb;
 import com.code.vv.vo.ViolationDetails;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created on 2020/8/25.
  * com.code.vv.common
@@ -17,7 +20,7 @@ public class VoTransfer {
      * @param context ViolationContextTb 对象
      * @return ViolationDetails 对象
      */
-    public static ViolationDetails detailVoTransfer(ViolationInfoTb info, ViolationContextTb context) {
+    private static ViolationDetails detailVoTransfer(ViolationInfoTb info, ViolationContextTb context) {
 
         ViolationDetails details = new ViolationDetails();
         details.setLicensePlate(info.getLicensePlate());
@@ -32,5 +35,21 @@ public class VoTransfer {
         details.setAmerce(context.getAmerce());
 
         return details;
+    }
+
+    /**
+     * 两个 List 的组装逻辑
+     * @param infoList 违章信息 List
+     * @param contextList 违章内容 List
+     * @return  List<ViolationDetails>
+     */
+    public static List<ViolationDetails> detailVoTransfer(List<ViolationInfoTb> infoList, List<ViolationContextTb> contextList) {
+        LinkedList<ViolationDetails> detailsList = new LinkedList<>();
+        for (ViolationInfoTb info: infoList) {
+            for (ViolationContextTb context :contextList) {
+                detailsList.add(detailVoTransfer(info, context));
+            }
+        }
+        return detailsList;
     }
 }

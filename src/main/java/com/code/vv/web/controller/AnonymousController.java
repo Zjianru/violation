@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnonymousController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAnonymousList")
-    @ResponseBody
     public String getAnonymousListMethod() {
         return "anonymousList";
     }

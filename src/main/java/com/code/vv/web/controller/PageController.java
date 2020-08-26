@@ -65,6 +65,11 @@ public class PageController {
         return "/adminUserAddPage";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/admin/context/create")
+    public String addContextMethod() {
+        return "/adminContextCreatePage";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/error")
     public String errorPageMethod() {
         return "/error";

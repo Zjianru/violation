@@ -42,4 +42,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/anonymous")
                 .excludePathPatterns("/getAnonymousList");
     }
+
 }

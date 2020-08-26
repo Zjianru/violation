@@ -3,6 +3,7 @@ package com.code.vv.service;
 import java.util.List;
 
 import com.code.vv.model.ViolationContextTb;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Created on 2020/8/24.
@@ -61,4 +62,16 @@ public interface ViolationContextTbService {
      */
     int updateByPrimaryKey(ViolationContextTb record);
 
+    /**
+     * findAll Context
+     * @return ist<ViolationContextTb>
+     */
+    List<ViolationContextTb> findAll();
+
+    /**
+     * findByContext
+     * @param context 违章内容
+     * @return 查找是否有违章内容存在
+     */
+    List<ViolationContextTb> findByContext(String context);
 }

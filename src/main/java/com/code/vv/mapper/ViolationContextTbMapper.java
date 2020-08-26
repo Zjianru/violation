@@ -1,4 +1,6 @@
 package com.code.vv.mapper;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import com.code.vv.model.ViolationContextTb;
 
@@ -56,4 +58,19 @@ public interface ViolationContextTbMapper {
      * @return update count
      */
     int updateByPrimaryKey(ViolationContextTb record);
+
+    /**
+     * findAll Context
+     * @return ist<ViolationContextTb>
+     */
+    List<ViolationContextTb> findAll();
+
+    /**
+     * findByContext
+     * @param context 违章内容
+     * @return 查找是否有违章内容存在
+     */
+    List<ViolationContextTb> findByContext(@Param("context")String context);
+
+
 }

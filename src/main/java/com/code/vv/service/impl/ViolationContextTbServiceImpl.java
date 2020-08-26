@@ -91,6 +91,24 @@ public class ViolationContextTbServiceImpl implements ViolationContextTbService 
         return violationContextTbMapper.updateByPrimaryKey(record);
     }
 
+    /**
+     * findAll Context
+     *
+     * @return ist<ViolationContextTb>
+     */
+    @Override
+    public List<ViolationContextTb> findAll() {
+        return violationContextTbMapper.findAll();
+    }
 
-
+    /**
+     * findByContext
+     *
+     * @param context 违章内容
+     * @return 查找是否有违章内容存在
+     */
+    @Override
+    public List<ViolationContextTb> findByContext(String context) {
+        return violationContextTbMapper.findByContext(context);
+    }
 }

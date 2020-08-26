@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>adminContextDemo</title>
+</head>
+
+<style type="text/css">
+    table.imageTable {
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+        align-content: center;
+    }
+
+    table.imageTable th {
+        background: #b5cfd2;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #999999;
+    }
+
+    table.imageTable td {
+        background: #dcddc0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #999999;
+    }
+</style>
+
+<body>
+<h2>admin Context Demo Page</h2>
+
+<table class="imageTable">
+    <thead>
+    <tr>
+        <th>违章内容描述</th>
+        <th>违章扣分</th>
+        <th>违章罚款</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody th:remove="all-but-first" style="align-content: center">
+    <tr th:each="context : ${contextList}">
+        <td th:text="${context.getContext()}"></td>
+        <td th:text="${context.getDeduction()}"></td>
+        <td th:text="${context.getAmerce()}"></td>
+        <td>
+<!--            todo update 需要查查-->
+            <a th:href="@{'/admin/context/update/'+${context.getId()}}" onclick="alert('确定封存这个账号吗？这个账号将不能登录！')"> 封存 </a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+<br>
+<input type="button" value="新增违章内容" onclick=jump()>
+
+<script>
+    function jump() {
+        window.location.href = "http://localhost:8080/admin/context/create";
+    }
+</script>
+</body>
+</html>

@@ -77,4 +77,10 @@ public interface ViolationUserTbService {
      */
     ViolationUserTb login(String name,String password);
 
+    /**
+     * 查找所有用户信息
+     * @return List<ViolationUserTb>
+     */
+    List<ViolationUserTb> findAll();
+
 }

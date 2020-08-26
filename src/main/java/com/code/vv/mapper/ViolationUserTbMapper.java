@@ -72,9 +72,17 @@ public interface ViolationUserTbMapper {
 
     /**
      * 登陆用
-     * @param userName 用户名
+     * @param name 用户名
      * @param password 密码
      * @return 查到的对象
      */
     ViolationUserTb login(@Param("name")String name, @Param("password")String password);
+
+    /**
+     * 查找所有用户信息
+     * @return List<ViolationUserTb>
+     */
+    List<ViolationUserTb> findAll();
+
+
 }

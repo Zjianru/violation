@@ -3,14 +3,11 @@ package com.code.vv.web.controller;
 import com.code.vv.common.Const;
 import com.code.vv.model.ViolationUserTb;
 import com.code.vv.service.ViolationUserTbService;
-import io.micrometer.core.instrument.util.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -56,14 +53,14 @@ public class LoginController {
                 modelAndView.setViewName("loginPage");
                 return modelAndView;
             }
-           // 普通用户
-            if (user.getRole() == 1){
+           // 普通用户 且可登录
+            if (user.getRole().equals(Const.USER_ROLE) && user.getStatus().equals(Const.USER_STATUS)){
                 session.setAttribute(Const.USER_SESSION_KEY,user);
                 modelAndView.setViewName("plainBackIndex");
                 return modelAndView;
             }
-            // Admin 用户
-            if (user.getRole() == 0){
+            // Admin 用户 且可登录
+            if (!user.getRole().equals(Const.USER_ADMIN_ROLE)){
                 session.setAttribute(Const.USER_SESSION_KEY,user);
                 modelAndView.setViewName("adminBackIndex");
                 return modelAndView;

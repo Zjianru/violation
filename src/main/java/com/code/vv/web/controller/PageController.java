@@ -55,6 +55,16 @@ public class PageController {
         return "/anonymousList";
     }
 
+    @RequestMapping(method = RequestMethod.GET,value = "/changePassPage")
+    public String changePassPage(){
+        return "/changePassPage";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/userAddPage")
+    public String addUserMethod() {
+        return "/adminUserAddPage";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/error")
     public String errorPageMethod() {
         return "/error";

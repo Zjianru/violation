@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>admin User Operate Page</title>
+</head>
+
+<style type="text/css">
+    table.imageTable {
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+        align-content: center;
+    }
+
+    table.imageTable th {
+        background: #b5cfd2;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #999999;
+    }
+
+    table.imageTable td {
+        background: #dcddc0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #999999;
+    }
+</style>
+<body>
+<h2>admin User Operate Page</h2>
+<table class="imageTable">
+    <thead>
+    <tr>
+        <!--        <th hidden> 人员 ID</th>-->
+        <th>工作人员登录名</th>
+        <th>登陆密码</th>
+        <th>工作人员权限</th>
+        <th>登陆状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody th:remove="all-but-first" style="align-content: center">
+    <tr th:each="user : ${userList}">
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getPassword()}"></td>
+        <td th:value="${user.getRole() eq 1 ? '普通用户':'admin 用户'}"
+            th:text="${user.getRole() eq 1 ? '普通用户':'admin 用户'}">
+        </td>
+        <td th:value="${user.getStatus() eq 1?'可登录':'不可登录'}"
+            th:text="${user.getStatus() eq 1 ? '可登录':'不可登录'}">
+        </td>
+        <td>
+            <a th:href="@{'/user/archive/'+${user.getId()}}" onclick="alert('确定封存这个账号吗？这个账号将不能登录！')"> 封存 </a>
+            <br>
+            <a th:href="@{'/user/enable/'+${user.getId()}}" onclick="alert('确定启用这个账号吗？这个账号之后将获得登录权限！')"> 启用 </a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+<br>
+<input type="button" value="新增普通人员" onclick=jump()>
+
+<script>
+    function jump() {
+        window.location.href = "http://localhost:8080/userAddPage";
+    }
+</script>
+</body>
+</html>

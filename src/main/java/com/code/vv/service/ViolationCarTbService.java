@@ -3,6 +3,7 @@ package com.code.vv.service;
 import java.util.List;
 
 import com.code.vv.model.ViolationCarTb;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Created on 2020/8/24.
@@ -68,4 +69,11 @@ public interface ViolationCarTbService {
      * @return List<ViolationCarTb>
      */
     List<ViolationCarTb> findAll();
+
+    /**
+     * 根据车牌查信息
+     * @param licensePlate 车牌信息
+     * @return List<ViolationCarTb>
+     */
+    List<ViolationCarTb> selectByLicensePlate(String licensePlate);
 }

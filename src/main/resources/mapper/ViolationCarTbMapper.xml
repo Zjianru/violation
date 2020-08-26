@@ -114,4 +114,12 @@
         <include refid="Base_Column_List"/>
         from violationdb.violation_car_tb
     </select>
+
+    <select id="selectByLicensePlate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from violationdb.violation_car_tb
+        where license_plate=#{licensePlate,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

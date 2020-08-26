@@ -76,5 +76,15 @@ public interface ViolationCarTbMapper {
      */
     List<ViolationCarTb> findAll();
 
+    /**
+     * 根据车牌查信息
+     * @param licensePlate 车牌信息
+     * @return List<ViolationCarTb>
+     */
+    List<ViolationCarTb> selectByLicensePlate(@Param("licensePlate")String licensePlate);
+
+
+
+
 
 }

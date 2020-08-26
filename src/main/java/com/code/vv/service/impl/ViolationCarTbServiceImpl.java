@@ -92,4 +92,8 @@ public class ViolationCarTbServiceImpl implements ViolationCarTbService {
         return violationCarTbMapper.findAll();
     }
 
+    @Override
+    public List<ViolationCarTb> selectByLicensePlate(String licensePlate) {
+        return violationCarTbMapper.selectByLicensePlate(licensePlate);
+    }
 }

@@ -1,17 +1,13 @@
 package com.code.vv.mapper;
 
 import com.code.vv.model.ViolationInfoTb;
-import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 /**
- * Created on 2020/8/24.
+ * Created on 2020/8/26.
  * com.code.vv.mapper
  *
  * @author Zjianru
  */
-@Mapper
 public interface ViolationInfoTbMapper {
     /**
      * delete by primary key
@@ -60,12 +56,4 @@ public interface ViolationInfoTbMapper {
      * @return update count
      */
     int updateByPrimaryKey(ViolationInfoTb record);
-
-    /**
-     * update Batch Selective
-     *
-     * @param list Batch list
-     * @return update count
-     */
-    int updateBatchSelective(List<ViolationInfoTb> list);
 }

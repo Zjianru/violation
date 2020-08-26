@@ -7,15 +7,25 @@ import com.code.vv.vo.ViolationDetails;
 /**
  * Created on 2020/8/25.
  * com.code.vv.common
- *
+ * VO 封装转换工具
  * @author Zjianru
  */
 public class VoTransfer {
+
     public static ViolationDetails detailVoTransfer(ViolationInfoTb info, ViolationContextTb context) {
-        return new ViolationDetails(info.getId(), info.getLicensePlate(),
-                info.getTime(), info.getPlace(),
-                context.getId(), context.getContext(),
-                context.getDeduction(), context.getAmerce(),
-                context.getDriverLicense());
+
+        ViolationDetails details = new ViolationDetails();
+        details.setLicensePlate(info.getLicensePlate());
+        details.setTime(info.getTime());
+        details.setPlace(info.getPlace());
+        details.setDriverLicense(info.getDriverLicense());
+
+        details.setViolationContextId(info.getViolationContext());
+
+        details.setContext(context.getContext());
+        details.setDeduction(context.getDeduction());
+        details.setAmerce(context.getAmerce());
+
+        return details;
     }
 }

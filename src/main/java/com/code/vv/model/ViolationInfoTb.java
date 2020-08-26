@@ -3,11 +3,13 @@ package com.code.vv.model;
 import java.util.Date;
 
 /**
- * Created on 2020/8/24.
+ * Created on 2020/8/26.
  * com.code.vv.model
  * 车辆违章信息表
+ *
  * @author Zjianru
  */
+
 public class ViolationInfoTb {
     /**
      * 违章信息 ID
@@ -15,7 +17,8 @@ public class ViolationInfoTb {
     private Integer id;
 
     /**
-     * 车辆车牌，逻辑对应 violation_car_tb 中 license_plate 字段的值
+     * 车辆车牌，逻辑对应 violation_car_tb 中
+     * license_plate 字段的值
      */
     private String licensePlate;
 
@@ -28,11 +31,17 @@ public class ViolationInfoTb {
      * 车辆违章地点
      */
     private String place;
+    /**
+     * 违章司机驾照信息  若不扣分 此字段可为空
+     */
+    private String driverLicense;
 
     /**
      * 违章内容  对应 violation_context_tb 表中的 ID
      */
     private Integer violationContext;
+
+
 
     public Integer getId() {
         return id;
@@ -47,7 +56,7 @@ public class ViolationInfoTb {
     }
 
     public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate == null ? null : licensePlate.trim();
+        this.licensePlate = licensePlate;
     }
 
     public Date getTime() {
@@ -63,7 +72,7 @@ public class ViolationInfoTb {
     }
 
     public void setPlace(String place) {
-        this.place = place == null ? null : place.trim();
+        this.place = place;
     }
 
     public Integer getViolationContext() {
@@ -72,6 +81,14 @@ public class ViolationInfoTb {
 
     public void setViolationContext(Integer violationContext) {
         this.violationContext = violationContext;
+    }
+
+    public String getDriverLicense() {
+        return driverLicense;
+    }
+
+    public void setDriverLicense(String driverLicense) {
+        this.driverLicense = driverLicense;
     }
 
     @Override
@@ -84,6 +101,7 @@ public class ViolationInfoTb {
                 ", time=" + time +
                 ", place=" + place +
                 ", violationContext=" + violationContext +
+                ", driverLicense=" + driverLicense +
                 "]";
     }
 
@@ -103,7 +121,8 @@ public class ViolationInfoTb {
                 && (this.getLicensePlate() == null ? other.getLicensePlate() == null : this.getLicensePlate().equals(other.getLicensePlate()))
                 && (this.getTime() == null ? other.getTime() == null : this.getTime().equals(other.getTime()))
                 && (this.getPlace() == null ? other.getPlace() == null : this.getPlace().equals(other.getPlace()))
-                && (this.getViolationContext() == null ? other.getViolationContext() == null : this.getViolationContext().equals(other.getViolationContext()));
+                && (this.getViolationContext() == null ? other.getViolationContext() == null : this.getViolationContext().equals(other.getViolationContext()))
+                && (this.getDriverLicense() == null ? other.getDriverLicense() == null : this.getDriverLicense().equals(other.getDriverLicense()));
     }
 
     @Override
@@ -115,6 +134,7 @@ public class ViolationInfoTb {
         result = prime * result + ((getTime() == null) ? 0 : getTime().hashCode());
         result = prime * result + ((getPlace() == null) ? 0 : getPlace().hashCode());
         result = prime * result + ((getViolationContext() == null) ? 0 : getViolationContext().hashCode());
+        result = prime * result + ((getDriverLicense() == null) ? 0 : getDriverLicense().hashCode());
         return result;
     }
 }

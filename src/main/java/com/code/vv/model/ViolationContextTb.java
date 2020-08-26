@@ -3,7 +3,7 @@ package com.code.vv.model;
 import java.math.BigDecimal;
 
 /**
- * Created on 2020/8/24.
+ * Created on 2020/8/26.
  * com.code.vv.model
  * 违章内容表，逻辑上被包含在违章信息表 violation_info_tb 表下
  * @author Zjianru
@@ -27,12 +27,7 @@ public class ViolationContextTb {
     /**
      * 罚款情况 为 0 则为不罚款
      */
-    private Long amerce;
-
-    /**
-     * 违章司机驾照信息  若不扣分 此字段可为空
-     */
-    private String driverLicense;
+    private BigDecimal amerce;
 
     public Integer getId() {
         return id;
@@ -47,7 +42,7 @@ public class ViolationContextTb {
     }
 
     public void setContext(String context) {
-        this.context = context == null ? null : context.trim();
+        this.context = context;
     }
 
     public Integer getDeduction() {
@@ -58,20 +53,12 @@ public class ViolationContextTb {
         this.deduction = deduction;
     }
 
-    public Long getAmerce() {
+    public BigDecimal getAmerce() {
         return amerce;
     }
 
-    public void setAmerce(Long amerce) {
+    public void setAmerce(BigDecimal amerce) {
         this.amerce = amerce;
-    }
-
-    public String getDriverLicense() {
-        return driverLicense;
-    }
-
-    public void setDriverLicense(String driverLicense) {
-        this.driverLicense = driverLicense == null ? null : driverLicense.trim();
     }
 
     @Override
@@ -83,7 +70,6 @@ public class ViolationContextTb {
                 ", context=" + context +
                 ", deduction=" + deduction +
                 ", amerce=" + amerce +
-                ", driverLicense=" + driverLicense +
                 "]";
     }
 
@@ -102,8 +88,7 @@ public class ViolationContextTb {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
                 && (this.getContext() == null ? other.getContext() == null : this.getContext().equals(other.getContext()))
                 && (this.getDeduction() == null ? other.getDeduction() == null : this.getDeduction().equals(other.getDeduction()))
-                && (this.getAmerce() == null ? other.getAmerce() == null : this.getAmerce().equals(other.getAmerce()))
-                && (this.getDriverLicense() == null ? other.getDriverLicense() == null : this.getDriverLicense().equals(other.getDriverLicense()));
+                && (this.getAmerce() == null ? other.getAmerce() == null : this.getAmerce().equals(other.getAmerce()));
     }
 
     @Override
@@ -114,7 +99,6 @@ public class ViolationContextTb {
         result = prime * result + ((getContext() == null) ? 0 : getContext().hashCode());
         result = prime * result + ((getDeduction() == null) ? 0 : getDeduction().hashCode());
         result = prime * result + ((getAmerce() == null) ? 0 : getAmerce().hashCode());
-        result = prime * result + ((getDriverLicense() == null) ? 0 : getDriverLicense().hashCode());
         return result;
     }
 }

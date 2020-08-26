@@ -31,9 +31,15 @@ public class ViolationDetails {
     private String place;
 
     /**
-     * 违章内容 ID
+     * 违章司机驾照信息  若不扣分 此字段可为空
+     */
+    private String driverLicense;
+
+    /**
+     * 违章内容  对应 violation_context_tb 表中的 ID
      */
     private Integer violationContextId;
+
 
     /**
      * 违章内容，实际指违章项目  eg:闯红灯
@@ -48,15 +54,12 @@ public class ViolationDetails {
     /**
      * 罚款情况 为 0 则为不罚款
      */
-    private Long amerce;
+    private BigDecimal amerce;
 
-    /**
-     * 违章司机驾照信息  若不扣分 此字段可为空
-     */
-    private String driverLicense;
+
 
     public ViolationDetails(Integer violationId, String licensePlate, Date time, String place,
-                            Integer violationContextId, String context, Integer deduction, Long amerce,
+                            Integer violationContextId, String context, Integer deduction, BigDecimal amerce,
                             String driverLicense) {
         this.violationId = violationId;
         this.licensePlate = licensePlate;
@@ -73,11 +76,11 @@ public class ViolationDetails {
 
     }
 
-    public Long getAmerce() {
+    public BigDecimal getAmerce() {
         return amerce;
     }
 
-    public void setAmerce(Long amerce) {
+    public void setAmerce(BigDecimal amerce) {
         this.amerce = amerce;
     }
 
@@ -136,7 +139,6 @@ public class ViolationDetails {
     public void setDeduction(Integer deduction) {
         this.deduction = deduction;
     }
-
 
     public String getDriverLicense() {
         return driverLicense;

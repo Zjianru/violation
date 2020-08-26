@@ -1,132 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.code.vv.mapper.ViolationContextTbMapper">
-    <resultMap id="BaseResultMap" type="com.code.vv.model.ViolationContextTb">
-        <!--@Table violationdb.violation_context_tb-->
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="context" jdbcType="VARCHAR" property="context"/>
-        <result column="deduction" jdbcType="INTEGER" property="deduction"/>
-        <result column="amerce" jdbcType="DECIMAL" property="amerce"/>
-        <result column="driver_license" jdbcType="VARCHAR" property="driverLicense"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-        id,
+  <resultMap id="BaseResultMap" type="com.code.vv.model.ViolationContextTb">
+    <!--@Table violation_context_tb-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="context" jdbcType="VARCHAR" property="context" />
+    <result column="deduction" jdbcType="INTEGER" property="deduction" />
+    <result column="amerce" jdbcType="DECIMAL" property="amerce" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, context, deduction, amerce
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from violation_context_tb
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from violation_context_tb
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.code.vv.model.ViolationContextTb" useGeneratedKeys="true">
+    insert into violation_context_tb (context, deduction, amerce
+      )
+    values (#{context,jdbcType=VARCHAR}, #{deduction,jdbcType=INTEGER}, #{amerce,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.code.vv.model.ViolationContextTb" useGeneratedKeys="true">
+    insert into violation_context_tb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="context != null">
         context,
+      </if>
+      <if test="deduction != null">
         deduction,
+      </if>
+      <if test="amerce != null">
         amerce,
-        driver_license
-    </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from violationdb.violation_context_tb
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete
-        from violationdb.violation_context_tb
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.code.vv.model.ViolationContextTb"
-            useGeneratedKeys="true">
-        insert into violationdb.violation_context_tb (context, deduction, amerce,
-                                                      driver_license)
-        values (#{context,jdbcType=VARCHAR}, #{deduction,jdbcType=INTEGER}, #{amerce,jdbcType=DECIMAL},
-                #{driverLicense,jdbcType=VARCHAR})
-    </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.code.vv.model.ViolationContextTb"
-            useGeneratedKeys="true">
-        insert into violationdb.violation_context_tb
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="context != null">
-                context,
-            </if>
-            <if test="deduction != null">
-                deduction,
-            </if>
-            <if test="amerce != null">
-                amerce,
-            </if>
-            <if test="driverLicense != null">
-                driver_license,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="context != null">
-                #{context,jdbcType=VARCHAR},
-            </if>
-            <if test="deduction != null">
-                #{deduction,jdbcType=INTEGER},
-            </if>
-            <if test="amerce != null">
-                #{amerce,jdbcType=DECIMAL},
-            </if>
-            <if test="driverLicense != null">
-                #{driverLicense,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.code.vv.model.ViolationContextTb">
-        update violationdb.violation_context_tb
-        <set>
-            <if test="context != null">
-                context = #{context,jdbcType=VARCHAR},
-            </if>
-            <if test="deduction != null">
-                deduction = #{deduction,jdbcType=INTEGER},
-            </if>
-            <if test="amerce != null">
-                amerce = #{amerce,jdbcType=DECIMAL},
-            </if>
-            <if test="driverLicense != null">
-                driver_license = #{driverLicense,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.code.vv.model.ViolationContextTb">
-        update violationdb.violation_context_tb
-        set context        = #{context,jdbcType=VARCHAR},
-            deduction      = #{deduction,jdbcType=INTEGER},
-            amerce         = #{amerce,jdbcType=DECIMAL},
-            driver_license = #{driverLicense,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateBatchSelective" parameterType="java.util.List">
-        update violationdb.violation_context_tb
-        <trim prefix="set" suffixOverrides=",">
-            <trim prefix="context = case" suffix="end,">
-                <foreach collection="list" index="index" item="item">
-                    <if test="item.context != null">
-                        when id = #{item.id,jdbcType=INTEGER} then #{item.context,jdbcType=VARCHAR}
-                    </if>
-                </foreach>
-            </trim>
-            <trim prefix="deduction = case" suffix="end,">
-                <foreach collection="list" index="index" item="item">
-                    <if test="item.deduction != null">
-                        when id = #{item.id,jdbcType=INTEGER} then #{item.deduction,jdbcType=INTEGER}
-                    </if>
-                </foreach>
-            </trim>
-            <trim prefix="amerce = case" suffix="end,">
-                <foreach collection="list" index="index" item="item">
-                    <if test="item.amerce != null">
-                        when id = #{item.id,jdbcType=INTEGER} then #{item.amerce,jdbcType=DECIMAL}
-                    </if>
-                </foreach>
-            </trim>
-            <trim prefix="driver_license = case" suffix="end,">
-                <foreach collection="list" index="index" item="item">
-                    <if test="item.driverLicense != null">
-                        when id = #{item.id,jdbcType=INTEGER} then #{item.driverLicense,jdbcType=VARCHAR}
-                    </if>
-                </foreach>
-            </trim>
-        </trim>
-        where id in
-        <foreach close=")" collection="list" item="item" open="(" separator=", ">
-            #{item.id,jdbcType=INTEGER}
-        </foreach>
-    </update>
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="context != null">
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="deduction != null">
+        #{deduction,jdbcType=INTEGER},
+      </if>
+      <if test="amerce != null">
+        #{amerce,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.code.vv.model.ViolationContextTb">
+    update violation_context_tb
+    <set>
+      <if test="context != null">
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="deduction != null">
+        deduction = #{deduction,jdbcType=INTEGER},
+      </if>
+      <if test="amerce != null">
+        amerce = #{amerce,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.code.vv.model.ViolationContextTb">
+    update violation_context_tb
+    set context = #{context,jdbcType=VARCHAR},
+      deduction = #{deduction,jdbcType=INTEGER},
+      amerce = #{amerce,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -18,7 +18,7 @@ public class Const {
     /**
      * admin 权限
      */
-    public static final Integer USER_ADMIN_ROLE = 1;
+    public static final Integer USER_ADMIN_ROLE = 0;
     /**
      * 用户默认登陆状态
      */

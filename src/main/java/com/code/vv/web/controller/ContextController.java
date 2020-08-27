@@ -49,7 +49,7 @@ public class ContextController {
                                      @Param("amerce") String amerce) {
         // 权限判定
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
-        if (userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
+        if (!userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
             return "/error";
         }
         // 违章描述唯一
@@ -84,7 +84,7 @@ public class ContextController {
     @RequestMapping(method = RequestMethod.GET, value = "/admin/context/findAll")
     public String adminContextFindAll(Model model, HttpSession session) {
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
-        if (userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
+        if (!userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
             return "/error";
         } else {
             model.addAttribute("contextList", contextTbService.findAll());
@@ -114,7 +114,7 @@ public class ContextController {
                                      @Param("amerce") String amerce) {
         // 权限判定
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
-        if (userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
+        if (!userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
             return "/error";
         }
         // 违章描述唯一
@@ -151,7 +151,7 @@ public class ContextController {
     public String adminContextDelete(@PathVariable("id") String id, HttpSession session) {
         // 权限判定
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
-        if (userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
+        if (!userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
             return "/error";
         }
         contextTbService.deleteByPrimaryKey(Integer.valueOf(id));

@@ -82,9 +82,9 @@
   </select>
 
   <select id="findByContext" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from violation_context_tb
-    where context=#{context,jdbcType=VARCHAR}
-  </select>
+        select
+        <include refid="Base_Column_List"/>
+        from violation_context_tb
+        where context=#{context,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -72,5 +72,4 @@ public interface ViolationContextTbMapper {
      */
     List<ViolationContextTb> findByContext(@Param("context")String context);
 
-
 }

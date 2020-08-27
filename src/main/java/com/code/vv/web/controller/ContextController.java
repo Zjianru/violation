@@ -7,18 +7,18 @@ import com.code.vv.service.ViolationContextTbService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created on 2020/8/26.
  * com.code.vv.web.controller
  * 违章内容控制 Controller
+ *
  * @author Zjianru
  */
 @Controller
@@ -93,8 +93,6 @@ public class ContextController {
     }
 
 
-
-
     /**
      * adminContextUpdate
      * 更改 Context
@@ -158,5 +156,49 @@ public class ContextController {
         return "redirect:/admin/context/findAll";
     }
 
+    /**
+     * 找到全部违章内容的描述
+     * @return List<String>
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/findAllContext")
+    @ResponseBody
+    @CrossOrigin
+    public List<String> findAllContext() {
+        List<ViolationContextTb> contexts = contextTbService.findAll();
+        ArrayList<String> result = new ArrayList<>();
+        for (ViolationContextTb context : contexts) {
+            result.add(context.getContext());
+        }
+        return result;
+    }
 
+    /**
+     * 根据违章内容描述找到对应的扣分项
+     * @param context 违章内容描述
+     * @return List<String> 扣分数目
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/findDeductionByContext")
+    @ResponseBody
+    @CrossOrigin
+    public List<String> findDeductionByContext(@RequestParam(value = "context") String context){
+        List<ViolationContextTb> byContext = contextTbService.findByContext(context);
+        List<String> list = new ArrayList<>();
+        list.add(String.valueOf(byContext.get(0).getDeduction()));
+        return list;
+    }
+
+    /**
+     * 根据违章内容描述找到对应的罚款项
+     * @param context 违章内容描述
+     * @return List<String> 罚款数目
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/findAmerceByContext")
+    @ResponseBody
+    @CrossOrigin
+    public List<String> findAmerceByContext(@RequestParam(value = "context") String context){
+        List<ViolationContextTb> byContext = contextTbService.findByContext(context);
+        List<String> list = new ArrayList<>();
+        list.add(String.valueOf(byContext.get(0).getAmerce()));
+        return list;
+    }
 }

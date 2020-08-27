@@ -95,7 +95,14 @@ public class InfoController {
      * @return 跳转页面地址
      */
     @RequestMapping(method = RequestMethod.POST, value = "/plain/Info/create")
-    public String plainInfoCreateMethod(Model model, HttpSession session) {
+    public String plainInfoCreateMethod(Model model, HttpSession session,
+                                        @RequestParam(value = "context") String context,
+                                        @RequestParam(value = "licensePlate") String licensePlate,
+                                        @RequestParam(value = "time") String time,
+                                        @RequestParam(value = "place") String place,
+                                        @RequestParam(value = "violationContext") String violationContext
+                                        ) {
+        System.out.println(context+"---"+licensePlate+"---"+time+"---"+place+"---"+violationContext+"---");
         return "redirect:/plain/info/list";
     }
 

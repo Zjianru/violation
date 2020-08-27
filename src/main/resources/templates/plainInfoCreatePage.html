@@ -1,31 +1,90 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>plainInfoCreatePage</title>
 </head>
 <body>
-    <h2>plain Info Create Page</h2>
+<h2>plain Info Create Page</h2>
 
-    <form action="/plain/Info/create" method="post" name="createInfoForm">
-        违章信息描述：
-        <label for="context"></label><input type="text" id="context" name="context">
-        <br>
-        违章车辆车牌信息：
-        <label for="licensePlate"></label><input type="text" id="licensePlate" name="licensePlate">
-        <br>
-        违章地点：
-        <label for="time"></label><input type="text" id="time" name="time">
-        <br>
-        违章时间：
-        <label for="place"></label><input type="text" id="place" name="place">
-        <br>
+<form action="/plain/Info/create" method="post" name="createInfoForm">
+    违章信息描述：
+    <label for="context"></label><input type="text" id="context" name="context">
+    <br>
+    违章车辆车牌信息：
+    <label for="licensePlate"></label><input type="text" id="licensePlate" name="licensePlate">
+    <br>
+    违章时间：
+    <label for="time"></label><input type="text" id="time" name="time">
+    <br>
+    违章地点：
+    <label for="place"></label><input type="text" id="place" name="place">
+    <br>
 
+    <!--违章内容-->
+    违章内容：
+    <select id="violationContext" name="violationContext" onchange="changeContext()">
+        <option th:each="context:${contextList}" th:value="${context.getContext()}"
+                th:text="${context.getContext()}"></option>
+    </select>
+    <br>
+    <!-- 扣分 -->
+    扣分：
+    <select id="deduction" name="deduction" onchange=changeDeduction()>
+        <option value="">扣分数</option>
+    </select>
+    <br>
+    罚款：
+    <!-- 罚款 -->
+    <select id="amerce" name="amerce" onchange=changeAmerce()>
+        <option value="">罚款金额</option>
+    </select>
+    <br>
 
+    <input type="submit" value="提交">
+</form>
+<script src='https://libs.jshub.com/jquery/3.5.0/jquery.js'></script>
+<script type="text/javascript">
 
+    $('#violationContext').change();
 
-        <input type="submit" value="提交">
-    </form>
+    function changeContext() {
+        $('#deduction').change();
+        $('#amerce').change();
+    }
 
+    function changeDeduction() {
+        let violationContext = $("#violationContext").val();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/findDeductionByContext",
+            data: {"context": violationContext},
+            success: function (deduction) {
+                $("#deduction").empty();
+                for (let i = 0; i < deduction.length; i++) {
+                    let option = $("<option></option>").text(deduction[i]);
+                    option.attr("value", deduction[i]);
+                    $("#deduction").append(option);
+                }
+            }
+        })
+    }
+
+    function changeAmerce() {
+        let violationContext = $("#violationContext").val();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/findAmerceByContext",
+            data: {"context": violationContext},
+            success: function (Amerce) {
+                $("#amerce").empty();
+                for (let i = 0; i < Amerce.length; i++) {
+                    let option = $("<option></option>").text(Amerce[i]);
+                    option.attr("value", Amerce[i]);
+                    $("#amerce").append(option);
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

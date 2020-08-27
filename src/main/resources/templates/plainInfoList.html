@@ -68,8 +68,8 @@
         <td th:text="${detail.getPlace()}"></td>
         <td th:text="${detail.getTime()}"></td>
         <td>
-            <a th:href="@{'plain/Info/update/'+${detail.getViolationId()}}" onclick="alert('确定修改这个违章信息吗？')"> 修改 </a>
-            <a th:href="@{'plain/Info/delete/'+${detail.getViolationId()}}" onclick="alert('确定删除这个违章信息吗？')"> 删除 </a>
+            <a th:href="@{'plain/Info/update/'+${detail.getViolationId()}}" onclick="alert('确定处理这个违章信息吗？')"> 处理该违章 </a>
+            <a th:href="@{'plain/Info/delete/'+${detail.getViolationId()}}" onclick="alert('确定删除这个违章信息吗？')"> 删除该违章 </a>
         </td>
     </tr>
     </tbody>

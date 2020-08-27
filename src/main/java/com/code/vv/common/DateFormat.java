@@ -18,10 +18,13 @@ public class DateFormat {
      * @return Date 对象
      */
     public static Date stringToDate(String dateString) {
-        SimpleDateFormat format = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;
         try {
             date = format.parse(dateString);
+            System.out.println("dateString------------->"+dateString);
+            System.out.println("date------------->"+date.getTime());
+            System.out.println("date------------->"+date.toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -34,7 +37,7 @@ public class DateFormat {
      * @return String 日期字符串
      */
     public static String dateToString(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(date);
     }
 }

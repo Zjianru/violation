@@ -1,6 +1,7 @@
 package com.code.vv.web.controller;
 
 import com.code.vv.common.Const;
+import com.code.vv.common.DateFormat;
 import com.code.vv.common.VoTransfer;
 import com.code.vv.model.ViolationContextTb;
 import com.code.vv.model.ViolationInfoTb;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -103,7 +105,30 @@ public class InfoController {
                                         @RequestParam(value = "violationContext") String violationContext
                                         ) {
         System.out.println(context+"---"+licensePlate+"---"+time+"---"+place+"---"+violationContext+"---");
-        return "redirect:/plain/info/list";
+        ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
+        if (!userInfo.getRole().equals(Const.USER_ROLE)) {
+            return "/error";
+        } else {
+            ViolationInfoTb violationInfoTb = new ViolationInfoTb();
+            violationInfoTb.setLicensePlate(licensePlate);
+            violationInfoTb.setTime(DateFormat.stringToDate(time));
+            violationInfoTb.setPlace(place);
+            List<ViolationContextTb> byContext = contextService.findByContext(violationContext);
+            ViolationContextTb contextTb = byContext.get(0);
+            violationInfoTb.setViolationContext(contextTb.getId());
+            if (contextTb.getDeduction() != 0){
+                violationInfoTb.setDeductionStatus(1);
+            }else {
+                violationInfoTb.setDeductionStatus(0);
+            }
+            if ( contextTb.getAmerce().intValue()> 0){
+                violationInfoTb.setAmerceStatus(1);
+            }else {
+                violationInfoTb.setAmerceStatus(0);
+            }
+            infoService.insert(violationInfoTb);
+            return "redirect:/plain/info/list";
+        }
     }
 
     /**

@@ -40,18 +40,20 @@
     </select>
     <br>
 
-    <input type="submit" value="提交">
+    <input type="submit" id="submit" name="submit" value="提交" onclick="check()">
 </form>
 <script src='https://libs.jshub.com/jquery/3.5.0/jquery.js'></script>
 <script type="text/javascript">
 
     $('#violationContext').change();
 
+    // 强制刷新
     function changeContext() {
         $('#deduction').change();
         $('#amerce').change();
     }
 
+    // 动态获取扣分信息
     function changeDeduction() {
         let violationContext = $("#violationContext").val();
         $.ajax({
@@ -69,6 +71,7 @@
         })
     }
 
+    // 动态获取罚款信息
     function changeAmerce() {
         let violationContext = $("#violationContext").val();
         $.ajax({
@@ -85,6 +88,23 @@
             }
         })
     }
+
+
+    /**
+     * 校验日期格式
+     * @returns {boolean}
+     */
+    function check() {
+        let date = document.getElementById("time").value;
+        let result = date.match(/[\d]{4}[\/-]{1}[\d]{1,2}[\/-]{1}[\d]{1,2}\s[\d]{1,2}[:][\d]{1,2}[:][\d]{1,2}/g);
+        alert(result);
+        if (result == null) {
+            alert("请输入正确的日期格式");
+            return false;
+        }
+    }
+
+
 </script>
 </body>
 </html>

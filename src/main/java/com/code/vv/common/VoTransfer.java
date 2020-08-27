@@ -37,6 +37,7 @@ public class VoTransfer {
 
     /**
      * 两个 List 的组装逻辑
+     * todo 调整逻辑
      * @param infoList 违章信息 List
      * @param contextList 违章内容 List
      * @return  List<ViolationDetails>

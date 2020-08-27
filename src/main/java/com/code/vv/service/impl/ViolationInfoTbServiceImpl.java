@@ -1,14 +1,12 @@
 package com.code.vv.service.impl;
 
-import org.apache.ibatis.annotations.Param;
+import com.code.vv.mapper.ViolationInfoTbMapper;
+import com.code.vv.model.ViolationInfoTb;
+import com.code.vv.service.ViolationInfoTbService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-
-import com.code.vv.mapper.ViolationInfoTbMapper;
-import com.code.vv.model.ViolationInfoTb;
-import com.code.vv.service.ViolationInfoTbService;
 
 /**
  * Created on 2020/8/24.

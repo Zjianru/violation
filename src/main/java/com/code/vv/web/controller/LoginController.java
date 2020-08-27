@@ -65,7 +65,7 @@ public class LoginController {
                 return modelAndView;
             }
             // Admin 用户 且可登录
-            if (!user.getRole().equals(Const.USER_ADMIN_ROLE)) {
+            if (user.getRole().equals(Const.USER_ADMIN_ROLE)) {
                 session.setAttribute(Const.USER_SESSION_KEY, user);
                 modelAndView.setViewName("adminBackIndex");
                 return modelAndView;

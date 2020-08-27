@@ -59,14 +59,19 @@ public class UserController {
      * @return String 跳转页面地址
      */
     @RequestMapping(method = RequestMethod.POST, value = "/user/addUser")
-    public String addUser(@Param("name") String name, @Param("pass") String pass) {
-        ViolationUserTb user = new ViolationUserTb();
-        user.setName(name);
-        user.setPassword(pass);
-        user.setRole(Const.USER_ROLE);
-        user.setStatus(Const.USER_STATUS);
-        userTbService.insert(user);
-        return "redirect:/user/Info";
+    public String addUser(@Param("name") String name, @Param("pass") String pass, HttpSession session) {
+        ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
+        if (!userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
+            return "/error";
+        } else {
+            ViolationUserTb user = new ViolationUserTb();
+            user.setName(name);
+            user.setPassword(pass);
+            user.setRole(Const.USER_ROLE);
+            user.setStatus(Const.USER_STATUS);
+            userTbService.insert(user);
+            return "redirect:/user/Info";
+        }
     }
 
     /**
@@ -79,7 +84,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, value = "/user/Info")
     public String userInfo(Model model, HttpSession session) {
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
-        if (userInfo.getRole() != 0) {
+        if (!userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
             return "/error";
         } else {
             model.addAttribute("userList", userTbService.findAll());
@@ -98,7 +103,7 @@ public class UserController {
     public String archiveUser(@PathVariable("id") String id, HttpSession session) {
         Integer deleteId = Integer.valueOf(id);
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
-        if (userInfo.getRole() != 0) {
+        if (!userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
             return "/error";
         } else {
             ViolationUserTb user = new ViolationUserTb();
@@ -120,7 +125,7 @@ public class UserController {
     public String enableUser(@PathVariable("id") String id, HttpSession session) {
         Integer deleteId = Integer.valueOf(id);
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
-        if (userInfo.getRole() != 0) {
+        if (!userInfo.getRole().equals(Const.USER_ADMIN_ROLE)) {
             return "/error";
         } else {
             ViolationUserTb user = new ViolationUserTb();
@@ -130,5 +135,4 @@ public class UserController {
             return "forward:/user/Info";
         }
     }
-
 }

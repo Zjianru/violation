@@ -49,7 +49,7 @@ public class InfoController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/plain/info/list")
     public String userList(Model model,
-                           @RequestParam(required = false, defaultValue = "2", value = "pageNum") Integer pageNum,
+                           @RequestParam(required = false, defaultValue = "5", value = "pageNum") Integer pageNum,
                            @RequestParam(defaultValue = "5", value = "pageSize") Integer pageSize) {
         //1.引入分页插件,pageNum是第几页，pageSize是每页显示多少条,默认查询总数count
         PageHelper.startPage(pageNum, pageSize);
@@ -174,7 +174,7 @@ public class InfoController {
                 model.addAttribute("details", details);
                 return "/plainInfoUpdatePage";
             } else {
-                // 扣分，需到处驾驶证填写框并做校验
+                // 扣分，需带出驾驶证填写框并做校验
                 model.addAttribute("details", details);
                 return "/plainInfoUpdatePageWDL";
             }
@@ -195,7 +195,6 @@ public class InfoController {
     public String plainInfoUpdateMethod(HttpSession session,
                                         @RequestParam(value = "id") String id,
                                         @RequestParam(value = "amerce") String amerce
-//                                        ,@RequestParam(value = "driverLicense") String driverLicense
     ) {
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
         if (!userInfo.getRole().equals(Const.USER_ROLE)) {
@@ -248,7 +247,7 @@ public class InfoController {
     }
 
     /**
-     * TODO 验证
+     * 根据驾驶证获得扣分总数
      *
      * @param driverLicense 驾驶证
      * @return List<String> 总扣分
@@ -256,7 +255,7 @@ public class InfoController {
     @RequestMapping(method = RequestMethod.POST, value = "/sumDriverLicense")
     @ResponseBody
     @CrossOrigin
-    public List<String> findAmerceByContext(@RequestParam(value = "driverLicense") String driverLicense) {
+    public List<String> findDeductionByContext(@RequestParam(value = "driverLicense") String driverLicense) {
         List<ViolationInfoTb> byDriverLicense = infoService.findByDriverLicense(driverLicense);
         int count = 0;
         List<String> list = new ArrayList<>();

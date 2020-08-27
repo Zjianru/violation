@@ -44,7 +44,7 @@ public class CarController {
                                 @Param("color") String color,
                                 @Param("seatNumber") int seatNumber) {
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
-        if (userInfo.getRole() != 1) {
+        if (!userInfo.getRole().equals(Const.USER_ROLE)) {
             return "/error";
         } else {
             List<ViolationCarTb> listByLicensePlate = carService.selectByLicensePlate(licensePlate);
@@ -71,7 +71,7 @@ public class CarController {
     @RequestMapping(method = RequestMethod.GET, value = "/carInfo")
     public String carInfo(Model model, HttpSession session) {
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
-        if (userInfo.getRole() != 1) {
+        if (!userInfo.getRole().equals(Const.USER_ROLE)) {
             return "/error";
         } else {
             model.addAttribute("carList", carService.findAll());

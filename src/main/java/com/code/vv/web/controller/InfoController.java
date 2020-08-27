@@ -194,7 +194,9 @@ public class InfoController {
     @RequestMapping(method = RequestMethod.POST, value = "/plain/info/update")
     public String plainInfoUpdateMethod(HttpSession session,
                                         @RequestParam(value = "id") String id,
-                                        @RequestParam(value = "amerce") String amerce) {
+                                        @RequestParam(value = "amerce") String amerce
+//                                        ,@RequestParam(value = "driverLicense") String driverLicense
+    ) {
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
         if (!userInfo.getRole().equals(Const.USER_ROLE)) {
             return "/error";
@@ -257,14 +259,17 @@ public class InfoController {
     public List<String> findAmerceByContext(@RequestParam(value = "driverLicense") String driverLicense) {
         List<ViolationInfoTb> byDriverLicense = infoService.findByDriverLicense(driverLicense);
         int count = 0;
-
-        //todo 驾驶证信息为空，需调整
-        for (ViolationInfoTb violationInfoTb : byDriverLicense) {
-            ViolationContextTb contextTb = contextService.selectByPrimaryKey(violationInfoTb.getViolationContext());
-            count += contextTb.getDeduction();
-        }
         List<String> list = new ArrayList<>();
-        list.add(String.valueOf(count));
+        // 首次被扣分
+        if (byDriverLicense == null) {
+            list.add(String.valueOf(0));
+        } else {
+            for (ViolationInfoTb violationInfoTb : byDriverLicense) {
+                ViolationContextTb contextTb = contextService.selectByPrimaryKey(violationInfoTb.getViolationContext());
+                count += contextTb.getDeduction();
+            }
+            list.add(String.valueOf(count));
+        }
         return list;
     }
 

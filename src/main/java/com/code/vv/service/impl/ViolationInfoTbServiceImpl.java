@@ -107,6 +107,6 @@ public class ViolationInfoTbServiceImpl implements ViolationInfoTbService {
      */
     @Override
     public List<ViolationInfoTb> findByDriverLicense(String driverLicense) {
-        return null;
+        return violationInfoTbMapper.findByDriverLicense(driverLicense);
     }
 }

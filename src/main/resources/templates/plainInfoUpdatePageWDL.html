@@ -8,7 +8,7 @@
 <h2>plain Info Update Page With Driver License</h2>
 
 
-<form action="/plain/info/update" method="post" name="updateInfoForm">
+<form action="/plain/info/updateWDL" method="post" name="updateInfoForm">
     <input type="hidden" th:value="${details.getViolationId()}" name="id" id="id">
     违章信息描述：<label for="context"></label>
     <input type="text" id="context" name="context" th:value="${details.getContext()}"

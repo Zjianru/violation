@@ -1,8 +1,14 @@
 package com.code.vv.service.impl;
 
+import com.code.vv.common.VoTransfer;
+import com.code.vv.mapper.ViolationContextTbMapper;
 import com.code.vv.mapper.ViolationInfoTbMapper;
+import com.code.vv.model.ViolationContextTb;
 import com.code.vv.model.ViolationInfoTb;
 import com.code.vv.service.ViolationInfoTbService;
+import com.code.vv.vo.ViolationDetails;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +26,9 @@ public class ViolationInfoTbServiceImpl implements ViolationInfoTbService {
 
     @Resource
     private ViolationInfoTbMapper violationInfoTbMapper;
+
+    @Resource
+    private ViolationContextTbMapper violationContextTbMapper;
 
     /**
      * 根据主键删除
@@ -106,5 +115,23 @@ public class ViolationInfoTbServiceImpl implements ViolationInfoTbService {
     @Override
     public List<ViolationInfoTb> findByDriverLicense(String driverLicense) {
         return violationInfoTbMapper.findByDriverLicense(driverLicense);
+    }
+
+    /**
+     * 分页
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @return PageInfo
+     */
+
+    @Override
+    public PageInfo manageList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<ViolationInfoTb> infoList = violationInfoTbMapper.findAll();
+        List<ViolationContextTb> contextList = violationContextTbMapper.findAll();
+        List<ViolationDetails> violationDetails = VoTransfer.detailVoTransfer(infoList, contextList);
+        PageInfo pageInfo = new PageInfo(infoList);
+        pageInfo.setList(violationDetails);
+        return pageInfo;
     }
 }

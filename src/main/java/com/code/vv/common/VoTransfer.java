@@ -37,7 +37,6 @@ public class VoTransfer {
 
     /**
      * 两个 List 的组装逻辑
-     * todo 调整逻辑
      * @param infoList 违章信息 List
      * @param contextList 违章内容 List
      * @return  List<ViolationDetails>
@@ -45,10 +44,11 @@ public class VoTransfer {
     public static List<ViolationDetails> detailVoTransfer(List<ViolationInfoTb> infoList, List<ViolationContextTb> contextList) {
         LinkedList<ViolationDetails> detailsList = new LinkedList<>();
         for (ViolationInfoTb info : infoList) {
-            Integer infoContext = info.getViolationContext();
+            Integer violationContextId = info.getViolationContext();
             for (ViolationContextTb context : contextList) {
-                if (infoContext.equals(context.getId())) {
-                    ViolationDetails details = VoTransfer.detailVoTransfer(info, context);
+                Integer contextId = context.getId();
+                if (contextId.equals(violationContextId)) {
+                    ViolationDetails details = detailVoTransfer(info, context);
                     detailsList.add(details);
                 }
             }

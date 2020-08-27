@@ -3,6 +3,7 @@ package com.code.vv.service;
 import java.util.List;
 
 import com.code.vv.model.ViolationInfoTb;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -68,4 +69,12 @@ public interface ViolationInfoTbService {
      * @return List<ViolationInfoTb>
      */
     List<ViolationInfoTb> findByDriverLicense(String driverLicense);
+
+    /**
+     * 分页
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @return PageInfo
+     */
+    PageInfo manageList(Integer pageNum, Integer pageSize);
 }

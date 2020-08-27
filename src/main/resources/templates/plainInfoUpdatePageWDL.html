@@ -43,6 +43,7 @@
 </form>
 <script src='https://libs.jshub.com/jquery/3.5.0/jquery.js'></script>
 <script type="text/javascript">
+    //todo 修理超12分仍可处理的BUG
     function check(){
         let driverLicense = $('#driverLicense').val();
         alert(driverLicense);
@@ -52,7 +53,7 @@
             data: {"driverLicense": driverLicense},
             success: function (count) {
                 alert(count);
-                if(count[0]>=12){
+                if(count[0].data>=12){
                     alert("该驾照已累计扣分12分或以上，不允许进行操作！")
                     return false;
                 }else {

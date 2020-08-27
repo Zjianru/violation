@@ -121,16 +121,17 @@
       amerce_status = #{amerceStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="findAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from violation_info_tb
-    </select>
 
   <select id="findByDriverLicense" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from violation_info_tb
     where driver_license=#{driverLicense,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from violation_info_tb
   </select>
 </mapper>

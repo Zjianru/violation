@@ -61,10 +61,10 @@ public interface ViolationInfoTbMapper {
     int updateByPrimaryKey(ViolationInfoTb record);
 
     /**
-     * findAll
-     * @return List<ViolationInfoTb>
+     *  findAll
+     * @return  List<ViolationInfoTb>
      */
-    List<ViolationInfoTb> findAll();
+ List<ViolationInfoTb> findAll();
 
     /**
      * 根据驾驶证信息查找所有

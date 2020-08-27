@@ -52,7 +52,8 @@
     </tr>
     </thead>
     <tbody th:remove="all-but-first" style="align-content: center">
-    <tr th:each="detail : ${detailList}">
+<!--    <tr th:each="detail : ${pageInfo.getList()}">-->
+    <tr th:each="detail : ${details}">
         <td th:text="${detail.getContext()}"></td>
         <td th:text="${detail.getDriverLicense()}"></td>
         <td th:text="${detail.getLicensePlate()}"></td>
@@ -85,14 +86,10 @@
             <a th:href="'/plain/info/list?pageNum=1'">首页</a>
         </li>
         <li class="prev" th:if="${pageInfo.hasPreviousPage}">
-            <a th:href="'/plain/info/list?pageNum='+${pageInfo.prePage}">
-                <i class="ace-icon fa fa-angle-double-left"></i>
-            </a>
+            <a th:href="'/plain/info/list?pageNum='+${pageInfo.prePage}">上一页</a>
         </li>
         <li class="next" th:if="${pageInfo.hasNextPage}">
-            <a th:href="'/plain/info/list?pageNum='+${pageInfo.nextPage}">
-                <i class="ace-icon fa fa-angle-double-right"></i>
-            </a>
+            <a th:href="'/plain/info/list?pageNum='+${pageInfo.nextPage}">下一页</a>
         </li>
         <li>
             <a th:href="'/plain/info/list?pageNum='+${pageInfo.pages}">尾页</a>

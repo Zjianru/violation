@@ -3,6 +3,7 @@ package com.code.vv.service;
 import java.util.List;
 
 import com.code.vv.model.ViolationInfoTb;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Created on 2020/8/24.
@@ -60,4 +61,11 @@ public interface ViolationInfoTbService {
      * @return List<ViolationInfoTb>
      */
     List<ViolationInfoTb> findAll();
+
+    /**
+     * 根据驾驶证信息查找所有
+     * @param driverLicense 驾驶证
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findByDriverLicense(String driverLicense);
 }

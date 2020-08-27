@@ -1,5 +1,6 @@
 package com.code.vv.service.impl;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -87,12 +88,25 @@ public class ViolationInfoTbServiceImpl implements ViolationInfoTbService {
     public int updateByPrimaryKey(ViolationInfoTb record) {
         return violationInfoTbMapper.updateByPrimaryKey(record);
     }
+
     /**
      * 查找所有违章信息
+     *
      * @return List<ViolationInfoTb>
      */
     @Override
     public List<ViolationInfoTb> findAll() {
         return violationInfoTbMapper.findAll();
+    }
+
+    /**
+     * 根据驾驶证信息查找所有
+     *
+     * @param driverLicense 驾驶证
+     * @return List<ViolationInfoTb>
+     */
+    @Override
+    public List<ViolationInfoTb> findByDriverLicense(String driverLicense) {
+        return null;
     }
 }

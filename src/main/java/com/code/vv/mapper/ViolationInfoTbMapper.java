@@ -1,4 +1,5 @@
 package com.code.vv.mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.code.vv.model.ViolationInfoTb;
 import java.util.List;
@@ -64,4 +65,13 @@ public interface ViolationInfoTbMapper {
      * @return List<ViolationInfoTb>
      */
     List<ViolationInfoTb> findAll();
+
+    /**
+     * 根据驾驶证信息查找所有
+     * @param driverLicense 驾驶证
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findByDriverLicense(@Param("driverLicense")String driverLicense);
+
+
 }

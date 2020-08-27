@@ -68,8 +68,8 @@
         <td th:text="${detail.getPlace()}"></td>
         <td th:text="${detail.getTime()}"></td>
         <td>
-            <a th:href="@{'plain/Info/update/'+${detail.getViolationId()}}" onclick="alert('确定处理这个违章信息吗？')"> 处理该违章 </a>
-            <a th:href="@{'plain/Info/delete/'+${detail.getViolationId()}}" onclick="alert('确定删除这个违章信息吗？')"> 删除该违章 </a>
+            <a th:href="@{'update/'+${detail.getViolationId()}}" onclick="alert('确定处理这个违章信息吗？')"> 处理该违章 </a>
+            <a th:href="@{'delete/'+${detail.getViolationId()}}" onclick="alert('确定删除这个违章信息吗？')"> 删除该违章 </a>
         </td>
     </tr>
     </tbody>
@@ -82,20 +82,20 @@
     </div>
     <ul class="pagination pull-right no-margin">
         <li th:if="${pageInfo.hasPreviousPage}">
-            <a th:href="'/plain/InfoList?pageNum=1'">首页</a>
+            <a th:href="'/plain/info/list?pageNum=1'">首页</a>
         </li>
         <li class="prev" th:if="${pageInfo.hasPreviousPage}">
-            <a th:href="'/plain/InfoList?pageNum='+${pageInfo.prePage}">
+            <a th:href="'/plain/info/list?pageNum='+${pageInfo.prePage}">
                 <i class="ace-icon fa fa-angle-double-left"></i>
             </a>
         </li>
         <li class="next" th:if="${pageInfo.hasNextPage}">
-            <a th:href="'/plain/InfoList?pageNum='+${pageInfo.nextPage}">
+            <a th:href="'/plain/info/list?pageNum='+${pageInfo.nextPage}">
                 <i class="ace-icon fa fa-angle-double-right"></i>
             </a>
         </li>
         <li>
-            <a th:href="'/plain/InfoList?pageNum='+${pageInfo.pages}">尾页</a>
+            <a th:href="'/plain/info/list?pageNum='+${pageInfo.pages}">尾页</a>
         </li>
     </ul>
     <input type="button" value="新增违章信息" onclick=jump()>

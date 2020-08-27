@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>plainInfoUpdatePageWDL</title>
+</head>
+<body>
+<h2>plain Info Update Page With Driver License</h2>
+
+
+<form action="/plain/info/update" method="post" name="updateInfoForm">
+    <input type="hidden" th:value="${details.getViolationId()}" name="id" id="id">
+    违章信息描述：<label for="context"></label>
+    <input type="text" id="context" name="context" th:value="${details.getContext()}"
+           disabled="disabled">
+    <br>
+    违章车辆车牌：<label for="licensePlate"></label>
+    <input type="text" id="licensePlate" name="licensePlate"
+           th:value="${details.getLicensePlate()}" disabled="disabled">
+    <br>
+
+    违章驾驶证：<label for="driverLicense"></label>
+    <input type="text" id="driverLicense" name="driverLicense"
+           th:value="${details.getDriverLicense()}">
+    <br>
+    扣分情况：<label for="deduction"></label>
+    <input type="text" id="deduction" name="deduction" th:value="${details.getDeduction()}">
+    <br>
+
+    罚款情况：<label for="amerce"></label>
+    <input type="text" id="amerce" name="amerce" th:value="${details.getAmerce()}">
+    <br>
+    违章时间：
+    <label for="time"></label>
+    <input type="text" id="time" name="time" th:value="${details.getTime()}"
+           disabled="disabled">
+    <br>
+    违章地点：<label for="place"></label>
+    <input type="text" id="place" name="place" th:value="${details.getPlace()}"
+           disabled="disabled">
+    <br>
+    <input type="submit" value="提交" onclick="check()">
+</form>
+<script src='https://libs.jshub.com/jquery/3.5.0/jquery.js'></script>
+<script type="text/javascript">
+//TODO 驾照校验 List<Integer>
+    function check(){
+        let driverLicense = $('#driverLicense').val();
+        alert(driverLicense);
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/sumDriverLicense",
+            data: {"driverLicense": driverLicense},
+            success: function (count) {
+                alert(count);
+                if(count[0]>=12){
+                    alert("该驾照已累计扣分12分或以上，不允许进行操作！")
+                    return false;
+                }else {
+                    return true;
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

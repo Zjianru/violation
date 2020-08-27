@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>plainInfoUpdatePage</title>
+</head>
+<body>
+<h2>plain Info Update Page</h2>
+
+<form action="/plain/info/update" method="post" name="updateInfoForm">
+    <input type="hidden" th:value="${details.getViolationId()}" name="id" id="id">
+    违章信息描述：<label for="context"></label>
+    <input type="text" id="context" name="context" th:value="${details.getContext()}"
+           disabled="disabled">
+    <br>
+    违章车辆车牌：<label for="licensePlate"></label>
+    <input type="text" id="licensePlate" name="licensePlate"
+           th:value="${details.getLicensePlate()}" disabled="disabled">
+    <br>
+    罚款情况：<label for="amerce"></label>
+    <input type="text" id="amerce" name="amerce" th:value="${details.getAmerce()}">
+    <br>
+    违章时间：
+    <label for="time"></label>
+    <input type="text" id="time" name="time" th:value="${details.getTime()}"
+           disabled="disabled">
+    <br>
+    违章地点：<label for="place"></label>
+    <input type="text" id="place" name="place" th:value="${details.getPlace()}"
+           disabled="disabled">
+    <br>
+
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>

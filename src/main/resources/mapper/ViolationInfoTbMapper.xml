@@ -126,4 +126,11 @@
         <include refid="Base_Column_List"/>
         from violation_info_tb
     </select>
+
+  <select id="findByDriverLicense" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from violation_info_tb
+    where driver_license=#{driverLicense,jdbcType=VARCHAR}
+  </select>
 </mapper>

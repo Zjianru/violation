@@ -20,7 +20,7 @@ public class VoTransfer {
      * @param context ViolationContextTb 对象
      * @return ViolationDetails 对象
      */
-    private static ViolationDetails detailVoTransfer(ViolationInfoTb info, ViolationContextTb context) {
+    public static ViolationDetails detailVoTransfer(ViolationInfoTb info, ViolationContextTb context) {
         ViolationDetails details = new ViolationDetails();
         details.setViolationId(info.getId());
         details.setLicensePlate(info.getLicensePlate());

@@ -36,7 +36,7 @@
 
 <body>
 <h2>plain Info List</h2>
-
+<!--TODO 修改相应显示-->
 <table class="imageTable">
     <thead>
     <tr>
@@ -44,7 +44,9 @@
         <th>违章驾驶证登记信息描述</th>
         <th>违章车辆车牌描述</th>
         <th>违章扣分情况</th>
+        <th>违章扣分状态</th>
         <th>违章罚款情况</th>
+        <th>违章罚款状态</th>
         <th>违章地点</th>
         <th>违章时间</th>
         <th>操作</th>
@@ -56,7 +58,9 @@
         <td th:text="${detail.getDriverLicense()}"></td>
         <td th:text="${detail.getLicensePlate()}"></td>
         <td th:text="${detail.getDeduction()}"></td>
+        <td th:text="${detail.getDeductionStatus()}"></td>
         <td th:text="${detail.getAmerce()}"></td>
+        <td th:text="${detail.getAmerceStatus()}"></td>
         <td th:text="${detail.getPlace()}"></td>
         <td th:text="${detail.getTime()}"></td>
         <td>

@@ -36,10 +36,19 @@ public class ViolationDetails {
     private String driverLicense;
 
     /**
+     * 扣分状态
+     */
+    private int deductionStatus;
+    /**
+     * 罚款状态
+     */
+    private int amerceStatus;
+
+
+    /**
      * 违章内容  对应 violation_context_tb 表中的 ID
      */
     private Integer violationContextId;
-
 
     /**
      * 违章内容，实际指违章项目  eg:闯红灯
@@ -56,20 +65,21 @@ public class ViolationDetails {
      */
     private BigDecimal amerce;
 
-
-
-    public ViolationDetails(Integer violationId, String licensePlate, Date time, String place,
-                            Integer violationContextId, String context, Integer deduction, BigDecimal amerce,
-                            String driverLicense) {
+    public ViolationDetails(Integer violationId, String licensePlate, Date time,
+                            String place, String driverLicense, int deductionStatus,
+                            int amerceStatus, Integer violationContextId, String context,
+                            Integer deduction, BigDecimal amerce) {
         this.violationId = violationId;
         this.licensePlate = licensePlate;
         this.time = time;
         this.place = place;
+        this.driverLicense = driverLicense;
+        this.deductionStatus = deductionStatus;
+        this.amerceStatus = amerceStatus;
         this.violationContextId = violationContextId;
         this.context = context;
         this.deduction = deduction;
         this.amerce = amerce;
-        this.driverLicense = driverLicense;
     }
 
     public ViolationDetails() {
@@ -94,6 +104,22 @@ public class ViolationDetails {
 
     public String getLicensePlate() {
         return licensePlate;
+    }
+
+    public int getDeductionStatus() {
+        return deductionStatus;
+    }
+
+    public void setDeductionStatus(int deductionStatus) {
+        this.deductionStatus = deductionStatus;
+    }
+
+    public int getAmerceStatus() {
+        return amerceStatus;
+    }
+
+    public void setAmerceStatus(int amerceStatus) {
+        this.amerceStatus = amerceStatus;
     }
 
     public void setLicensePlate(String licensePlate) {

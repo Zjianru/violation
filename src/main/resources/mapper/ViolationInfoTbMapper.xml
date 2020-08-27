@@ -9,12 +9,15 @@
     <result column="place" jdbcType="VARCHAR" property="place" />
     <result column="violation_context" jdbcType="INTEGER" property="violationContext" />
     <result column="driver_license" jdbcType="VARCHAR" property="driverLicense" />
+    <result column="deduction_status" jdbcType="INTEGER" property="deductionStatus" />
+    <result column="amerce_status" jdbcType="INTEGER" property="amerceStatus" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, license_plate, `time`, place, violation_context, driver_license
+    id, license_plate, `time`, place, violation_context, driver_license, deduction_status, 
+    amerce_status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from violation_info_tb
     where id = #{id,jdbcType=INTEGER}
@@ -24,10 +27,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.code.vv.model.ViolationInfoTb" useGeneratedKeys="true">
-    insert into violation_info_tb (license_plate, `time`, place,
-      violation_context, driver_license)
+    insert into violation_info_tb (license_plate, `time`, place, 
+      violation_context, driver_license, deduction_status, 
+      amerce_status)
     values (#{licensePlate,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR}, 
-      #{violationContext,jdbcType=INTEGER}, #{driverLicense,jdbcType=VARCHAR})
+      #{violationContext,jdbcType=INTEGER}, #{driverLicense,jdbcType=VARCHAR}, #{deductionStatus,jdbcType=INTEGER}, 
+      #{amerceStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.code.vv.model.ViolationInfoTb" useGeneratedKeys="true">
     insert into violation_info_tb
@@ -47,6 +52,12 @@
       <if test="driverLicense != null">
         driver_license,
       </if>
+      <if test="deductionStatus != null">
+        deduction_status,
+      </if>
+      <if test="amerceStatus != null">
+        amerce_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="licensePlate != null">
@@ -63,6 +74,12 @@
       </if>
       <if test="driverLicense != null">
         #{driverLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="deductionStatus != null">
+        #{deductionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="amerceStatus != null">
+        #{amerceStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -84,6 +101,12 @@
       <if test="driverLicense != null">
         driver_license = #{driverLicense,jdbcType=VARCHAR},
       </if>
+      <if test="deductionStatus != null">
+        deduction_status = #{deductionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="amerceStatus != null">
+        amerce_status = #{amerceStatus,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -93,10 +116,11 @@
       `time` = #{time,jdbcType=TIMESTAMP},
       place = #{place,jdbcType=VARCHAR},
       violation_context = #{violationContext,jdbcType=INTEGER},
-      driver_license = #{driverLicense,jdbcType=VARCHAR}
+      driver_license = #{driverLicense,jdbcType=VARCHAR},
+      deduction_status = #{deductionStatus,jdbcType=INTEGER},
+      amerce_status = #{amerceStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
   <select id="findAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

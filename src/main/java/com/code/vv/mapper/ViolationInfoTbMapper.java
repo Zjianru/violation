@@ -1,15 +1,15 @@
 package com.code.vv.mapper;
-import org.apache.ibatis.annotations.Param;
-import java.util.List;
 
 import com.code.vv.model.ViolationInfoTb;
+import java.util.List;
 
 /**
- * Created on 2020/8/26.
+ * Created on 2020/8/27.
  * com.code.vv.mapper
  *
  * @author Zjianru
  */
+
 public interface ViolationInfoTbMapper {
     /**
      * delete by primary key
@@ -60,10 +60,8 @@ public interface ViolationInfoTbMapper {
     int updateByPrimaryKey(ViolationInfoTb record);
 
     /**
-     * 查找所有违章信息
+     * findAll
      * @return List<ViolationInfoTb>
      */
     List<ViolationInfoTb> findAll();
-
-
 }

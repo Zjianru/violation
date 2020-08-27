@@ -23,11 +23,13 @@ public class VoTransfer {
     private static ViolationDetails detailVoTransfer(ViolationInfoTb info, ViolationContextTb context) {
 
         ViolationDetails details = new ViolationDetails();
+
+        details.setViolationId(info.getId());
         details.setLicensePlate(info.getLicensePlate());
         details.setTime(info.getTime());
-        details.setPlace(info.getPlace());
+        details.setPlace(info.getPlace());details.setDeductionStatus(info.getDeductionStatus());
         details.setDriverLicense(info.getDriverLicense());
-
+        details.setAmerceStatus(info.getAmerceStatus());
         details.setViolationContextId(info.getViolationContext());
 
         details.setContext(context.getContext());
@@ -39,6 +41,7 @@ public class VoTransfer {
 
     /**
      * 两个 List 的组装逻辑
+     * TODO 调整显示 Bug
      * @param infoList 违章信息 List
      * @param contextList 违章内容 List
      * @return  List<ViolationDetails>

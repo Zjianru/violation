@@ -1,5 +1,6 @@
 package com.code.vv.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.code.vv.model.ViolationInfoTb;
@@ -77,4 +78,15 @@ public interface ViolationInfoTbService {
      * @return PageInfo
      */
     PageInfo manageList(Integer pageNum, Integer pageSize);
+
+    /**
+     * 在某段时间范围内某驾驶证的违章信息
+     * @param minTime 从之前的什么时间开始算起
+     * @param maxTime 当前时间
+     * @param driverLicense 驾驶证信息
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findAllByTimeBetweenAndDriverLicense(Date minTime, Date maxTime, String driverLicense);
+
+
 }

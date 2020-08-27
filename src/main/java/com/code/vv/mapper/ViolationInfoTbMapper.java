@@ -1,7 +1,9 @@
 package com.code.vv.mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.code.vv.model.ViolationInfoTb;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,17 +63,28 @@ public interface ViolationInfoTbMapper {
     int updateByPrimaryKey(ViolationInfoTb record);
 
     /**
-     *  findAll
-     * @return  List<ViolationInfoTb>
+     * findAll
+     *
+     * @return List<ViolationInfoTb>
      */
- List<ViolationInfoTb> findAll();
+    List<ViolationInfoTb> findAll();
 
     /**
      * 根据驾驶证信息查找所有
+     *
      * @param driverLicense 驾驶证
      * @return List<ViolationInfoTb>
      */
-    List<ViolationInfoTb> findByDriverLicense(@Param("driverLicense")String driverLicense);
+    List<ViolationInfoTb> findByDriverLicense(@Param("driverLicense") String driverLicense);
+
+    /**
+     * 在某段时间范围内某驾驶证的违章信息
+     * @param minTime 从什么时间开始算起
+     * @param maxTime 当前时间
+     * @param driverLicense 驾驶证信息
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findAllByTimeBetweenAndDriverLicense(@Param("minTime") Date minTime, @Param("maxTime") Date maxTime, @Param("driverLicense") String driverLicense);
 
 
 }

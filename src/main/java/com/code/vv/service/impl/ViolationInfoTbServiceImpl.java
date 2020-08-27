@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -133,5 +134,17 @@ public class ViolationInfoTbServiceImpl implements ViolationInfoTbService {
         PageInfo pageInfo = new PageInfo(infoList);
         pageInfo.setList(violationDetails);
         return pageInfo;
+    }
+
+    /**
+     * 在某段时间范围内某驾驶证的违章信息
+     * @param minTime 从之前的什么时间开始算起
+     * @param maxTime 当前时间
+     * @param driverLicense 驾驶证信息
+     * @return List<ViolationInfoTb>
+     */
+    @Override
+    public List<ViolationInfoTb> findAllByTimeBetweenAndDriverLicense(Date minTime, Date maxTime, String driverLicense) {
+        return violationInfoTbMapper.findAllByTimeBetweenAndDriverLicense(minTime, maxTime, driverLicense);
     }
 }

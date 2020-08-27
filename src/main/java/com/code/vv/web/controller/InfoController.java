@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -216,6 +217,7 @@ public class InfoController {
         if (!userInfo.getRole().equals(Const.USER_ROLE)) {
             return "/error";
         } else {
+            // TODO 同一驾照一年内扣分超过12分数，返回列表页
             ViolationInfoTb infoModel = infoService.selectByPrimaryKey(Integer.valueOf(id));
             ViolationContextTb contextModel = contextService.selectByPrimaryKey(infoModel.getViolationContext());
             if (!amerce.equals(contextModel.getAmerce().toString())) {

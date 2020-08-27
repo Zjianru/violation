@@ -23,7 +23,7 @@ public class ViolationDetails {
     /**
      * 违章时间
      */
-    private Date time;
+    private String time;
 
     /**
      * 车辆违章地点
@@ -65,7 +65,7 @@ public class ViolationDetails {
      */
     private BigDecimal amerce;
 
-    public ViolationDetails(Integer violationId, String licensePlate, Date time,
+    public ViolationDetails(Integer violationId, String licensePlate, String time,
                             String place, String driverLicense, int deductionStatus,
                             int amerceStatus, Integer violationContextId, String context,
                             Integer deduction, BigDecimal amerce) {
@@ -126,11 +126,11 @@ public class ViolationDetails {
         this.licensePlate = licensePlate;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

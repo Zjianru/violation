@@ -13,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,10 +36,7 @@ public class InfoController {
     }
 
 
-    // Info 的  CRUD
-
     /**
-     * TODO 未测试
      * 分页查询 Info
      * @param model model
      * @param pageNum 分页数
@@ -59,7 +54,7 @@ public class InfoController {
         try {
             List<ViolationInfoTb> infoList = infoService.findAll();
             List<ViolationContextTb> contextList = contextService.findAll();
-            List<ViolationDetails> violationDetails = VoTransfer.detailVoTransfer(infoList, contextList);
+            List<ViolationDetails> violationDetails = VoTransfer.detailVoTransfer(infoList,contextList);
             System.out.println("分页数据：" + violationDetails);
             //3.使用PageInfo包装查询后的结果,5是连续显示的条数,结果list类型是Page<E>
             PageInfo<ViolationDetails> pageInfo = new PageInfo<>(violationDetails, pageSize);

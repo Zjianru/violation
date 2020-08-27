@@ -21,36 +21,35 @@ public class VoTransfer {
      * @return ViolationDetails 对象
      */
     private static ViolationDetails detailVoTransfer(ViolationInfoTb info, ViolationContextTb context) {
-
         ViolationDetails details = new ViolationDetails();
-
         details.setViolationId(info.getId());
         details.setLicensePlate(info.getLicensePlate());
-        details.setTime(info.getTime());
+        details.setTime(DateFormat.dateToString(info.getTime()));
         details.setPlace(info.getPlace());details.setDeductionStatus(info.getDeductionStatus());
         details.setDriverLicense(info.getDriverLicense());
         details.setAmerceStatus(info.getAmerceStatus());
         details.setViolationContextId(info.getViolationContext());
-
         details.setContext(context.getContext());
         details.setDeduction(context.getDeduction());
         details.setAmerce(context.getAmerce());
-
         return details;
     }
 
     /**
      * 两个 List 的组装逻辑
-     * TODO 调整显示 Bug
      * @param infoList 违章信息 List
      * @param contextList 违章内容 List
      * @return  List<ViolationDetails>
      */
     public static List<ViolationDetails> detailVoTransfer(List<ViolationInfoTb> infoList, List<ViolationContextTb> contextList) {
         LinkedList<ViolationDetails> detailsList = new LinkedList<>();
-        for (ViolationInfoTb info: infoList) {
-            for (ViolationContextTb context :contextList) {
-                detailsList.add(detailVoTransfer(info, context));
+        for (ViolationInfoTb info : infoList) {
+            Integer infoContext = info.getViolationContext();
+            for (ViolationContextTb context : contextList) {
+                if (infoContext.equals(context.getId())) {
+                    ViolationDetails details = VoTransfer.detailVoTransfer(info, context);
+                    detailsList.add(details);
+                }
             }
         }
         return detailsList;

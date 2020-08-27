@@ -85,11 +85,6 @@
                 <i class="ace-icon fa fa-angle-double-left"></i>
             </a>
         </li>
-        <!--遍历条数-->
-        <li th:each="nav:${pageInfo.navigatepageNums}">
-            <a th:href="'/plain/InfoList?pageNum='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
-            <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
-        </li>
         <li class="next" th:if="${pageInfo.hasNextPage}">
             <a th:href="'/plain/InfoList?pageNum='+${pageInfo.nextPage}">
                 <i class="ace-icon fa fa-angle-double-right"></i>
@@ -99,6 +94,13 @@
             <a th:href="'/plain/InfoList?pageNum='+${pageInfo.pages}">尾页</a>
         </li>
     </ul>
+<!--TODO 添加新增按钮、更新操作-->
+    <input type="button" value="新增违章信息" onclick=jump()>
+
+    <script>
+        function jump(){
+            window.location.href="http://localhost:8080/plain/Info/createPage";
+        }
 </div>
 
 </body>

@@ -81,6 +81,10 @@ public class PageController {
         return modelAndView;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/plain/Info/createPage")
+    public String plainInfoCreateMethod() {
+        return "/plainInfoCreatePage";
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/error")
     public String errorPageMethod() {

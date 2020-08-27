@@ -57,15 +57,20 @@
         <td th:text="${detail.getContext()}"></td>
         <td th:text="${detail.getDriverLicense()}"></td>
         <td th:text="${detail.getLicensePlate()}"></td>
+
         <td th:text="${detail.getDeduction()}"></td>
-        <td th:text="${detail.getDeductionStatus()}"></td>
+        <td th:value="${detail.getDeductionStatus() eq 1?'已扣分':'不扣分'}"
+            th:text="${detail.getDeductionStatus() eq 1 ? '已扣分':'不扣分'}">
+
         <td th:text="${detail.getAmerce()}"></td>
-        <td th:text="${detail.getAmerceStatus()}"></td>
+        <td th:value="${detail.getAmerceStatus() eq 1?'需缴费':'无需缴费'}"
+            th:text="${detail.getAmerceStatus() eq 1 ? '需缴费':'无需缴费'}">
+
         <td th:text="${detail.getPlace()}"></td>
         <td th:text="${detail.getTime()}"></td>
         <td>
-            <a th:href="@{'/plain/updateInfo/'+${detail.getViolationId()}}" onclick="alert('确定修改这个违章信息吗？')"> 修改 </a>
-            <a th:href="@{'/plain/deleteInfo/'+${detail.getViolationId()}}" onclick="alert('确定删除这个违章内容吗？')"> 删除 </a>
+            <a th:href="@{'plain/Info/update/'+${detail.getViolationId()}}" onclick="alert('确定修改这个违章信息吗？')"> 修改 </a>
+            <a th:href="@{'plain/Info/delete/'+${detail.getViolationId()}}" onclick="alert('确定删除这个违章信息吗？')"> 删除 </a>
         </td>
     </tr>
     </tbody>
@@ -94,13 +99,13 @@
             <a th:href="'/plain/InfoList?pageNum='+${pageInfo.pages}">尾页</a>
         </li>
     </ul>
-<!--TODO 添加新增按钮、更新操作-->
     <input type="button" value="新增违章信息" onclick=jump()>
 
     <script>
-        function jump(){
-            window.location.href="http://localhost:8080/plain/Info/createPage";
+        function jump() {
+            window.location.href = "http://localhost:8080/plain/Info/createPage";
         }
+    </script>
 </div>
 
 </body>

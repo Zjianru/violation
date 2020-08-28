@@ -6,26 +6,38 @@
 </head>
     <body>
     <h1>anonymousList</h1>
-        匿名用户查看此页
-    <button onclick="check()" name="点击" value= anonymous >点击</button>
+        匿名用户查看此页进行查询
+
+    <form action="/anonymous/queryAll" method="post" name="anonymousQueryAllForm">
+        查询所有违章记录
+        车牌：<label for="licensePlate"></label>
+        <input type="text" id="licensePlate" name="licensePlate">
+        <br>
+        <input type="submit" value="提交">
+    </form>
+
+
+<div>
+    <form action="/anonymous/queryNoAmerce" method="post" name="anonymousQueryNoAmerceForm">
+        查询未处理违章记录
+        车牌：<label for="licensePlate"></label>
+        <input type="text" id="licensePlateForQueryNoAmerce" name="licensePlateForQueryNoAmerce">
+        <br>
+        <input type="submit" value="提交">
+    </form>
+</div>
+    <div>
+        <form action="/anonymous/queryWithAmerce" method="post" name="anonymousQueryWithAmerceForm">
+            查询已处理违章记录
+            车牌：<label for="licensePlate"></label>
+            <input type="text" id="licensePlateForQueryWithAmerce" name="licensePlateForQueryWithAmerce">
+            <br>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+
+
+
     </body>
 
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
-<script type="application/javascript">
-function check() {
-    jQuery.ajax({
-        url: "/getAnonymousList",
-        dataType: "json",
-        type: "get",
-        async: false,  //false同步
-        contentType: "charset=gbk",//删除后可以使用data传数据
-        error: function () {
-        },
-        success: function (data) {
-            alert(data);
-        }
-    })
-}
-
-</script>
 </html>

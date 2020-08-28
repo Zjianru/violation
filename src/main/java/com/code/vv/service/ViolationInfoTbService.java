@@ -88,5 +88,38 @@ public interface ViolationInfoTbService {
      */
     List<ViolationInfoTb> findAllByTimeBetweenAndDriverLicense(Date minTime, Date maxTime, String driverLicense);
 
+    /**
+     * 分页 根据车牌找所有
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @param licensePlate 车牌
+     * @return PageInfo
+     */
+    PageInfo anonymousQueryAllList(Integer pageNum, Integer pageSize, String licensePlate);
+
+    /**
+     * 根据车牌找所有
+     * @param licensePlate licensePlate
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findAllByLicensePlate(String licensePlate);
+
+    /**
+     * 找不同状态的信息
+     * @param licensePlate licensePlate
+     * @param amerceStatus amerceStatus
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findAllByLicensePlateAndAmerceStatus(String licensePlate,Integer amerceStatus);
+
+    /**
+     * 分页找不同状态的信息
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @param licensePlate licensePlate
+     * @param amerceStatus amerceStatus
+     * @return PageInfo
+     */
+    PageInfo anonymousQueryWithAmerceList(Integer pageNum, Integer pageSize, String licensePlate, Integer amerceStatus);
 
 }

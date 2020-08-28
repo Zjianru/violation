@@ -86,5 +86,21 @@ public interface ViolationInfoTbMapper {
      */
     List<ViolationInfoTb> findAllByTimeBetweenAndDriverLicense(@Param("minTime") Date minTime, @Param("maxTime") Date maxTime, @Param("driverLicense") String driverLicense);
 
+    /**
+     * 根据车牌找所有
+     * @param licensePlate licensePlate
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findAllByLicensePlate(@Param("licensePlate")String licensePlate);
+
+    /**
+     * 找不同状态的信息
+     * @param licensePlate licensePlate
+     * @param amerceStatus amerceStatus
+     * @return List<ViolationInfoTb>
+     */
+    List<ViolationInfoTb> findAllByLicensePlateAndAmerceStatus(@Param("licensePlate")String licensePlate,@Param("amerceStatus")Integer amerceStatus);
+
+
 
 }

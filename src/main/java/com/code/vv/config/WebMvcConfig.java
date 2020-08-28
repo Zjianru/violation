@@ -18,29 +18,34 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
-    private LoginInterceptor loginAuthenticator;
+    private LoginInterceptor LoginInterceptor;
 
     /**
      * 登录拦截器
+     *
      * @param registry registry
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/login");
+        registry.addViewController("/")
+                .setViewName("forward:/login");
     }
 
     /**
      * 路径排除
+     *
      * @param registry InterceptorRegistry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginAuthenticator)
+        registry.addInterceptor(LoginInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/loginPage")
                 .excludePathPatterns("/anonymous")
-                .excludePathPatterns("/getAnonymousList");
+                .excludePathPatterns("/anonymous/queryAll")
+                .excludePathPatterns("/anonymous/queryNoAmerce")
+                .excludePathPatterns("/anonymous/queryWithAmerce");
     }
 
 }

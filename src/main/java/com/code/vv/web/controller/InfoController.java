@@ -213,7 +213,7 @@ public class InfoController {
                                                          @RequestParam(value = "id") String id,
                                                          @RequestParam(value = "amerce") String amerce,
                                                          @RequestParam(value = "driverLicense") String driverLicense) {
-        System.out.println(id+"---amerce:---"+amerce+"driverLicense-=-"+driverLicense);
+        System.out.println(id + "---amerce:---" + amerce + "driverLicense-=-" + driverLicense);
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
         if (!userInfo.getRole().equals(Const.USER_ROLE)) {
             return "/error";
@@ -259,6 +259,70 @@ public class InfoController {
         return list;
     }
 
+
+    /**
+     * 查询所有违章记录 带数据进页面 分页
+     *
+     * @param model
+     * @param pageNum
+     * @param pageSize
+     * @param licensePlate
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/anonymous/queryAll")
+    public String anonymousQueryAll(Model model,
+                                    @RequestParam(defaultValue = "1", value = "pageNum", required = false) Integer pageNum,
+                                    @RequestParam(defaultValue = "5", value = "pageSize") Integer pageSize,
+                                    @RequestParam(value = "licensePlate") String licensePlate) {
+        PageInfo pageInfo = infoService.anonymousQueryAllList(pageNum, pageSize, licensePlate);
+        PageHelper.startPage(pageNum, pageSize);
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("details", VoTransfer.detailVoTransfer(infoService.findAllByLicensePlate(licensePlate), contextService.findAll()));
+        return "/anonymousInfoList";
+    }
+
+
+    /**
+     * 查询未处理违章记录 带数据进页面 分页
+     *
+     * @param model
+     * @param pageNum
+     * @param pageSize
+     * @param licensePlateForQueryNoAmerce
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/anonymous/queryNoAmerce")
+    public String anonymousQueryNoAmerce(Model model,
+                                         @RequestParam(defaultValue = "1", value = "pageNum", required = false) Integer pageNum,
+                                         @RequestParam(defaultValue = "5", value = "pageSize") Integer pageSize,
+                                         @RequestParam(value = "licensePlateForQueryNoAmerce") String licensePlateForQueryNoAmerce) {
+        PageInfo pageInfo = infoService.anonymousQueryWithAmerceList(pageNum, pageSize, licensePlateForQueryNoAmerce,Const.NO_AMERCE);
+        PageHelper.startPage(pageNum, pageSize);
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("details", VoTransfer.detailVoTransfer(infoService.findAllByLicensePlateAndAmerceStatus(licensePlateForQueryNoAmerce,Const.NO_AMERCE), contextService.findAll()));
+        return "/anonymousNoAmerceInfoList";
+    }
+
+    /**
+     * 查询已处理违章记录 带数据进页面 分页
+     *
+     * @param model
+     * @param pageNum
+     * @param pageSize
+     * @param licensePlateForQueryWithAmerce
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/anonymous/queryWithAmerce")
+    public String anonymousQueryWithAmerce(Model model,
+                                           @RequestParam(defaultValue = "1", value = "pageNum", required = false) Integer pageNum,
+                                           @RequestParam(defaultValue = "5", value = "pageSize") Integer pageSize,
+                                           @RequestParam(value = "licensePlateForQueryWithAmerce") String licensePlateForQueryWithAmerce) {
+        PageInfo pageInfo = infoService.anonymousQueryWithAmerceList(pageNum, pageSize, licensePlateForQueryWithAmerce,Const.NEED_AMERCE);
+        PageHelper.startPage(pageNum, pageSize);
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("details", VoTransfer.detailVoTransfer(infoService.findAllByLicensePlateAndAmerceStatus(licensePlateForQueryWithAmerce,Const.NO_AMERCE), contextService.findAll()));
+        return "/anonymousWithAmerceInfoList";
+    }
 
 }
 

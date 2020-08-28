@@ -56,7 +56,6 @@ public class PageController {
     public String anonymousMethod() {
         return "/anonymousList";
     }
-
     @RequestMapping(method = RequestMethod.GET, value = "/changePassPage")
     public String changePassPage() {
         return "/changePassPage";

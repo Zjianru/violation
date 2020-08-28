@@ -152,4 +152,18 @@
     driver_license=#{driverLicense,jdbcType=VARCHAR}
   </select>
 
+  <select id="findAllByLicensePlate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from violation_info_tb
+        where license_plate=#{licensePlate,jdbcType=VARCHAR}
+    </select>
+
+  <select id="findAllByLicensePlateAndAmerceStatus" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from violation_info_tb
+    where license_plate=#{licensePlate,jdbcType=VARCHAR} and amerce_status=#{amerceStatus,jdbcType=INTEGER}
+  </select>
+
 </mapper>

@@ -9,6 +9,7 @@ import com.code.vv.service.ViolationInfoTbService;
 import com.code.vv.vo.ViolationDetails;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -147,4 +148,65 @@ public class ViolationInfoTbServiceImpl implements ViolationInfoTbService {
     public List<ViolationInfoTb> findAllByTimeBetweenAndDriverLicense(Date minTime, Date maxTime, String driverLicense) {
         return violationInfoTbMapper.findAllByTimeBetweenAndDriverLicense(minTime, maxTime, driverLicense);
     }
+
+
+    /**
+     *
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @param licensePlate 车牌
+     * @return
+     */
+    @Override
+    public PageInfo anonymousQueryAllList(Integer pageNum, Integer pageSize, String licensePlate) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<ViolationInfoTb> infoList = violationInfoTbMapper.findAllByLicensePlate(licensePlate);
+        List<ViolationContextTb> contextList = violationContextTbMapper.findAll();
+        List<ViolationDetails> violationDetails = VoTransfer.detailVoTransfer(infoList, contextList);
+        PageInfo pageInfo = new PageInfo(infoList);
+        pageInfo.setList(violationDetails);
+        return pageInfo;
+    }
+
+    /**
+     *
+     * @param licensePlate licensePlate
+     * @return
+     */
+    @Override
+    public List<ViolationInfoTb> findAllByLicensePlate(String licensePlate) {
+        return violationInfoTbMapper.findAllByLicensePlate(licensePlate);
+    }
+
+    /**
+     *查不同状态信息
+     * @param licensePlate licensePlate
+     * @param amerceStatus amerceStatus
+     * @return List<ViolationInfoTb>
+     */
+    @Override
+    public List<ViolationInfoTb> findAllByLicensePlateAndAmerceStatus(String licensePlate, Integer amerceStatus) {
+        return violationInfoTbMapper.findAllByLicensePlateAndAmerceStatus(licensePlate, amerceStatus);
+    }
+
+    /**
+     * 分页查不同状态信息
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @param licensePlate licensePlate
+     * @param amerceStatus amerceStatus
+     * @return PageInfo
+     */
+    @Override
+    public PageInfo anonymousQueryWithAmerceList(Integer pageNum, Integer pageSize, String licensePlate, Integer amerceStatus) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<ViolationInfoTb> infoList = violationInfoTbMapper.findAllByLicensePlateAndAmerceStatus(licensePlate,amerceStatus);
+        List<ViolationContextTb> contextList = violationContextTbMapper.findAll();
+        List<ViolationDetails> violationDetails = VoTransfer.detailVoTransfer(infoList, contextList);
+        PageInfo pageInfo = new PageInfo(infoList);
+        pageInfo.setList(violationDetails);
+        return pageInfo;
+    }
+
+
 }

@@ -27,4 +27,14 @@ public class Const {
      * 用户封存状态
      */
     public static final Integer USER_DELETE_STATUS = 0;
+    /**
+     * 需要缴费，标记为未处理
+     */
+    public static final Integer NEED_AMERCE = 1;
+    /**
+     * 不需缴费，标记为已处理
+     */
+    public static final Integer NO_AMERCE = 0;
+
+
 }

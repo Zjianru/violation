@@ -23,7 +23,8 @@
            th:value="${details.getDriverLicense()}">
     <br>
     扣分情况：<label for="deduction"></label>
-    <input type="text" id="deduction" name="deduction" th:value="${details.getDeduction()}" disabled="disabled">
+    <input type="text" id="deductionOn" name="deductionOn" th:value="${details.getDeduction()}" disabled="disabled">
+    <input type="hidden" th:value="${details.getDeduction()}" name="deduction" id="deduction">
     <br>
 
     罚款情况：<label for="amerceOn"></label>
@@ -43,22 +44,24 @@
 </form>
 <script src='https://libs.jshub.com/jquery/3.5.0/jquery.js'></script>
 <script type="text/javascript">
-    function check(){
+    function check() {
         let driverLicense = $('#driverLicense').val();
         let amerce = $('#amerce').val();
-        alert("driverLicense is :"+driverLicense);
-        alert("amerce is :"+amerce);
+        let deduction = $('#deduction').val();
+        alert("driverLicense is :" + driverLicense);
+        alert("amerce is :" + amerce);
+        alert("deduction is :" + deduction);
 
         $.ajax({
             type: "POST",
             url: "http://localhost:8080/sumDriverLicense",
             data: {"driverLicense": driverLicense},
             success: function (count) {
-                alert("count:"+count);
-                if(count>=12){
+                alert("count:" + count);
+                if (count >= 12) {
                     alert("该驾照已累计扣分12分或以上，不允许进行操作！")
                     return false;
-                }else {
+                } else {
                     document.getElementById('updateInfoForm').submit();
                 }
                 return false;

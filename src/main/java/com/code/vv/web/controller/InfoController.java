@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -243,7 +244,13 @@ public class InfoController {
     @ResponseBody
     @CrossOrigin
     public List<String> findDeductionByContext(@RequestParam(value = "driverLicense") String driverLicense) {
-        List<ViolationInfoTb> byDriverLicense = infoService.findByDriverLicense(driverLicense);
+        // 查到从现在往前数一年之内的违章信息
+        Date maxTime = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(maxTime);
+        cal.add(Calendar.YEAR, -1);
+        Date minTime = cal.getTime();
+        List<ViolationInfoTb> byDriverLicense = infoService.findAllByTimeBetweenAndDriverLicense(minTime, maxTime, driverLicense);
         int count = 0;
         List<String> list = new ArrayList<>();
         // 首次被扣分
@@ -327,6 +334,7 @@ public class InfoController {
 
     /**
      * 根据 ID 查完整信息
+     *
      * @param id
      * @param model
      * @return

@@ -296,10 +296,10 @@ public class InfoController {
                                          @RequestParam(defaultValue = "1", value = "pageNum", required = false) Integer pageNum,
                                          @RequestParam(defaultValue = "5", value = "pageSize") Integer pageSize,
                                          @RequestParam(value = "licensePlateForQueryNoAmerce") String licensePlateForQueryNoAmerce) {
-        PageInfo pageInfo = infoService.anonymousQueryWithAmerceList(pageNum, pageSize, licensePlateForQueryNoAmerce,Const.NO_AMERCE);
+        PageInfo pageInfo = infoService.anonymousQueryWithAmerceList(pageNum, pageSize, licensePlateForQueryNoAmerce, Const.NO_AMERCE);
         PageHelper.startPage(pageNum, pageSize);
         model.addAttribute("pageInfo", pageInfo);
-        model.addAttribute("details", VoTransfer.detailVoTransfer(infoService.findAllByLicensePlateAndAmerceStatus(licensePlateForQueryNoAmerce,Const.NO_AMERCE), contextService.findAll()));
+        model.addAttribute("details", VoTransfer.detailVoTransfer(infoService.findAllByLicensePlateAndAmerceStatus(licensePlateForQueryNoAmerce, Const.NO_AMERCE), contextService.findAll()));
         return "/anonymousNoAmerceInfoList";
     }
 
@@ -317,12 +317,29 @@ public class InfoController {
                                            @RequestParam(defaultValue = "1", value = "pageNum", required = false) Integer pageNum,
                                            @RequestParam(defaultValue = "5", value = "pageSize") Integer pageSize,
                                            @RequestParam(value = "licensePlateForQueryWithAmerce") String licensePlateForQueryWithAmerce) {
-        PageInfo pageInfo = infoService.anonymousQueryWithAmerceList(pageNum, pageSize, licensePlateForQueryWithAmerce,Const.NEED_AMERCE);
+        PageInfo pageInfo = infoService.anonymousQueryWithAmerceList(pageNum, pageSize, licensePlateForQueryWithAmerce, Const.NEED_AMERCE);
         PageHelper.startPage(pageNum, pageSize);
         model.addAttribute("pageInfo", pageInfo);
-        model.addAttribute("details", VoTransfer.detailVoTransfer(infoService.findAllByLicensePlateAndAmerceStatus(licensePlateForQueryWithAmerce,Const.NO_AMERCE), contextService.findAll()));
+        model.addAttribute("details", VoTransfer.detailVoTransfer(infoService.findAllByLicensePlateAndAmerceStatus(licensePlateForQueryWithAmerce, Const.NEED_AMERCE), contextService.findAll()));
         return "/anonymousWithAmerceInfoList";
     }
+
+
+    /**
+     * 根据 ID 查完整信息
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/anonymous/info/{id}")
+    public String anonymousInfoPageMethod(@PathVariable("id") String id, Model model) {
+        ViolationInfoTb infoTb = infoService.selectByPrimaryKey(Integer.valueOf(id));
+        ViolationContextTb contextTb = contextService.selectByPrimaryKey(infoTb.getViolationContext());
+        ViolationDetails details = VoTransfer.detailVoTransfer(infoTb, contextTb);
+        model.addAttribute("detail", details);
+        return "/anonymousInfoPage";
+    }
+
 
 }
 

@@ -165,5 +165,4 @@
     from violation_info_tb
     where license_plate=#{licensePlate,jdbcType=VARCHAR} and amerce_status=#{amerceStatus,jdbcType=INTEGER}
   </select>
-
 </mapper>

@@ -39,33 +39,19 @@
     <thead>
     <tr>
         <th>违章信息描述</th>
-        <th>违章驾驶证登记信息描述</th>
-        <th>违章车辆车牌描述</th>
-        <th>违章扣分情况</th>
-        <th>违章扣分状态</th>
-        <th>违章罚款情况</th>
-        <th>违章罚款状态</th>
         <th>违章地点</th>
         <th>违章时间</th>
+        <th>操作</th>
     </tr>
     </thead>
     <tbody th:remove="all-but-first" style="align-content: center">
     <tr th:each="detail : ${details}">
         <td th:text="${detail.getContext()}"></td>
-        <td th:text="${detail.getDriverLicense()}"></td>
-        <td th:text="${detail.getLicensePlate()}"></td>
-
-        <td th:text="${detail.getDeduction()}"></td>
-        <td th:value="${detail.getDeductionStatus() eq 1?'已扣分':'不扣分'}"
-            th:text="${detail.getDeductionStatus() eq 1 ? '已扣分':'不扣分'}">
-
-        <td th:text="${detail.getAmerce()}"></td>
-        <td th:value="${detail.getAmerceStatus() eq 1?'需缴费':'无需缴费'}"
-            th:text="${detail.getAmerceStatus() eq 1 ? '需缴费':'无需缴费'}">
-
         <td th:text="${detail.getPlace()}"></td>
         <td th:text="${detail.getTime()}"></td>
-
+        <td>
+            <a th:href="@{'/anonymous/info/'+${detail.getViolationId()}}">查询 </a>
+        </td>
     </tr>
     </tbody>
 </table>

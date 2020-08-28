@@ -101,6 +101,4 @@ public interface ViolationInfoTbMapper {
      */
     List<ViolationInfoTb> findAllByLicensePlateAndAmerceStatus(@Param("licensePlate")String licensePlate,@Param("amerceStatus")Integer amerceStatus);
 
-
-
 }

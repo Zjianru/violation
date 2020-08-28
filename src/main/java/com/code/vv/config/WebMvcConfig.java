@@ -45,7 +45,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/anonymous")
                 .excludePathPatterns("/anonymous/queryAll")
                 .excludePathPatterns("/anonymous/queryNoAmerce")
-                .excludePathPatterns("/anonymous/queryWithAmerce");
+                .excludePathPatterns("/anonymous/queryWithAmerce")
+                .excludePathPatterns("/anonymous/info/**");
     }
 
 }

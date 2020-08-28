@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>anonymousInfoPage</title>
+</head>
+<body>
+<h2>anonymous Info Page</h2>
+<dl>
+    <dt>违章信息描述:</dt>
+    <dd th:text="${detail.getContext()}"></dd>
+    <dt>违章驾驶证登记信息描述:</dt>
+    <dd th:text="${detail.getDriverLicense()}"></dd>
+    <dt>违章车辆车牌描述:</dt>
+    <dd th:text="${detail.getLicensePlate()}"></dd>
+    <dt>违章扣分情况:</dt>
+    <dd th:text="${detail.getDeduction()}"></dd>
+    <dt>违章扣分状态:</dt>
+    <dd th:value="${detail.getDeductionStatus() eq 1?'已扣分':'不扣分'}"
+        th:text="${detail.getDeductionStatus() eq 1 ? '已扣分':'不扣分'}">
+    <dt>违章罚款情况:</dt>
+    <dd th:text="${detail.getAmerce()}"></dd>
+    <dt>违章罚款状态:</dt>
+    <dd th:value="${detail.getAmerceStatus() eq 1?'需缴费':'无需缴费'}"
+        th:text="${detail.getAmerceStatus() eq 1 ? '需缴费':'无需缴费'}">
+    <dt>违章地点:</dt>
+    <dd th:text="${detail.getPlace()}"></dd>
+    <dt>违章时间:</dt>
+    <dd th:text="${detail.getTime()}"></dd>
+</dl>
+</body>
+</html>

@@ -213,11 +213,11 @@ public class InfoController {
                                                          @RequestParam(value = "id") String id,
                                                          @RequestParam(value = "amerce") String amerce,
                                                          @RequestParam(value = "driverLicense") String driverLicense) {
+        System.out.println(id+"---amerce:---"+amerce+"driverLicense-=-"+driverLicense);
         ViolationUserTb userInfo = (ViolationUserTb) session.getAttribute(Const.USER_SESSION_KEY);
         if (!userInfo.getRole().equals(Const.USER_ROLE)) {
             return "/error";
         } else {
-            // TODO 同一驾照一年内扣分超过12分数，返回列表页
             ViolationInfoTb infoModel = infoService.selectByPrimaryKey(Integer.valueOf(id));
             ViolationContextTb contextModel = contextService.selectByPrimaryKey(infoModel.getViolationContext());
             if (!amerce.equals(contextModel.getAmerce().toString())) {

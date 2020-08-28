@@ -26,8 +26,9 @@
     <input type="text" id="deduction" name="deduction" th:value="${details.getDeduction()}" disabled="disabled">
     <br>
 
-    罚款情况：<label for="amerce"></label>
-    <input type="text" id="amerce" name="amerce" th:value="${details.getAmerce()}" disabled="disabled">
+    罚款情况：<label for="amerceOn"></label>
+    <input type="text" id="amerceOn" name="amerceOn" th:value="${details.getAmerce()}" disabled="disabled">
+    <input type="hidden" th:value="${details.getAmerce()}" name="amerce" id="amerce">
     <br>
     违章时间：
     <label for="time"></label>
@@ -44,7 +45,10 @@
 <script type="text/javascript">
     function check(){
         let driverLicense = $('#driverLicense').val();
+        let amerce = $('#amerce').val();
         alert("driverLicense is :"+driverLicense);
+        alert("amerce is :"+amerce);
+
         $.ajax({
             type: "POST",
             url: "http://localhost:8080/sumDriverLicense",
